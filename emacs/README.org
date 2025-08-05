@@ -1102,4 +1102,5 @@ Make initial buffer read-only and disable line numbers
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
-
+#+HTML_HEAD: <meta name="fediverse:creator" content="@Seize@mastodon.social">
+#+HTML_HEAD: <a rel="me" href="https://mastodon.social/@Seize">Mastodon</a>
