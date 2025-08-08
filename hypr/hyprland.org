@@ -493,7 +493,10 @@ monitor=,preferred,auto,auto
 
 Specify configuration for built in Laptop Display
 #+begin_src conf :tangle hyprland.conf
-monitor=eDP-1, 3840x2160@60.0020, 0x0, 1.5 
+  monitor=eDP-1, 3840x2160@60.0020, 0x0, 1.5 
+
+  # for use with no 4k laptop. Otherwise comment out in favor of the above monitor configuration.
+  monitor=eDP-1, 1920x1080@60.02700, 0x0, 1.0 
 #+end_src
 
 Specify configuration for /HP DislayPort Monitor/
@@ -520,7 +523,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shadder file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-#screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+##############screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:
