@@ -403,7 +403,7 @@ submap = Clipboard
 
 ***** Reset submap 
 #+begin_src conf :tangle hyprland.conf
-  bind =, delete, submap, reset 
+  bind =, escape, submap, reset 
   submap = reset
 #+end_src
 *** Hyprshot
@@ -428,7 +428,7 @@ bind=, P,exec,hyprpicker -a -f hex
 
 **** Reset Submap
 #+begin_src conf :tangle hyprland.conf
- bind =, delete, submap, reset 
+ bind =, escape, submap, reset 
  submap = reset
 #+end_src
 #+begin_src conf :tangle hyprland.conf
@@ -523,7 +523,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shadder file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-##############screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+#####screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:

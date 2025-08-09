@@ -10,7 +10,6 @@ Toggle Grouping		<span foreground="#8be9fd" face="serif">Mod+G</span>
 Toggle floating		<span foreground="#8be9fd" face="serif">Mod+V</span>
 
 <span size="large" foreground="#50fa7b" face="serif">Hyprland Ecosystem</span>
-Hyprpicker 		<span foreground="#8be9fd" face="serif">Mod+CTRL+P</span>
 Hyprlock		<span foreground="#ff5555" face="serif">Mod+Shift+L</span>
 Wlogout			<span foreground="#ff5555" face="serif">Mod+TAB+W</span>
 

@@ -44,7 +44,6 @@ This section includes the main heading to be displayed in NWG-Wrapper
 this section includes keybindings related to programs in the "Hyprland ecosystem". In otherwords, these are programs intended to integrate with /Hyprland/. 
 #+begin_src html :tangle ~/dotfiles/nwg-wrapper/bindings.pango
 <span size="large" foreground="#50fa7b" face="serif">Hyprland Ecosystem</span>
-Hyprpicker 		<span foreground="#8be9fd" face="serif">Mod+CTRL+P</span>
 Hyprlock		<span foreground="#ff5555" face="serif">Mod+Shift+L</span>
 Wlogout			<span foreground="#ff5555" face="serif">Mod+TAB+W</span>
 

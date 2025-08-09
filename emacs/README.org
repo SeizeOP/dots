@@ -556,6 +556,8 @@ Enable Doom Modeline
      ("<XF86AudioPrev>" . emms-previous)
      ("<XF86AudioNext>" . emms-next)
      ("<XF86AudioPlay>" . emms-pause)))
+  (setq emms-player-list '(emms-player-mpv))
+  (setq emms-source-file-default-directory "~/Music/")
 #+end_src
 * ELFEED
 ** Elfeed
