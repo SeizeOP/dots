@@ -11,23 +11,25 @@ Toggle floating		<span foreground="#8be9fd" face="serif">Mod+V</span>
 Hyprlock                <span foreground="#ff5555" face="serif">Mod+Shift+L</span>
 Wlogout                 <span foreground="#ff5555" face="serif">Mod+TAB+W</span>
 
-<span size="large" foreground="#bd93f9" face="serif">Cliphist</span>
-Show Clipboard          <span foreground="#8be9fd" face="serif">Mod+CTRL+V</span>
-Delete Clipboard Entry  <span foreground="#8be9fd" face="serif">Mod+CTRL+D</span>
-Wipe Clipboard          <span foreground="#8be9fd" face="serif">Mod+CTRL+E</span>
-
-<span size="large" foreground="#bd93f9" face="serif">Kitty</span>
-Emoji picker            <span foreground="#8be9fd" face="serif">CTRL+Shift+U</span>
-</span>
-</span>
+<span size="large" foreground="#bd93f9" face="serif">Clipboard Submap</span>
+Enter Submpap           <span foreground="#ff5555" face="serif">ALT+C</span>
+Show Clipboard          <span foreground="#8be9fd" face="serif">V</span>
+Delete Clipboard Entry  <span foreground="#8be9fd" face="serif">D</span>
+Erase Clipboard History <span foreground="#8be9fd" face="serif">E</span>
+Exit Submpap            <span foreground="#ff5555" face="serif">ESC</span>
 
 <span size="x-large" foreground="#50fa7b" face="serif">Program Keybindings</span>
 
-<span size="large" foreground="#bd93f9" face="serif">Personal Scripts</span>
-HD's Control Panel                     <span foreground="#8be9fd" face="serif">Mod+O</span>
-Reload DE/WM Configs                   <span foreground="#8be9fd" face="serif">Mod+SHIFT+C</span>
-
 <span size="large" foreground="#bd93f9" face="serif">Emacs Keybindings</span>
-Emacs                           <span foreground="#8be9fd" face="serif">Mod+E</span>
-Org Babel Tangle                <span foreground="#8be9fd" face="serif">C-c C-v T</span>
-Orgmode TAB                     <span foreground="#8be9fd" face="serif">M-I</span>
+Emacs                   <span foreground="#8be9fd" face="serif">Mod+E</span>
+Org Babel Tangle        <span foreground="#8be9fd" face="serif">C-c C-v T</span>
+Orgmode TAB             <span foreground="#8be9fd" face="serif">M-I</span>
+
+<span size="large" foreground="#bd93f9" face="serif">Kitty</span>
+Emoji picker            <span foreground="#8be9fd" face="serif">CTRL+SHIFT+U</span>
+
+<span size="large" foreground="#bd93f9" face="serif">Personal Scripts</span>
+HD's Control Panel      <span foreground="#8be9fd" face="serif">Mod+O</span>
+Reload DE/WM Configs    <span foreground="#8be9fd" face="serif">Mod+SHIFT+C</span>
+</span>
+</span>
