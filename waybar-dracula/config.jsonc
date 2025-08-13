@@ -43,7 +43,8 @@
     "format": "󱓟",
     "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
     "signal": 6,
-    "tooltip": false,
+    "tooltip": true,
+    "tooltip-format": "Rofi: Application Launcher",
     "return-type": "json"
 },
 

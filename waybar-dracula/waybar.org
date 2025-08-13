@@ -87,13 +87,14 @@ Configuration for the clock module
 
 Configuration for the custom rofi module
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
-    "custom/rofi": {
-        "format": "󱓟",
-        "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
-        "signal": 6,
-        "tooltip": false,
-        "return-type": "json"
-    },
+  "custom/rofi": {
+      "format": "󱓟",
+      "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
+      "signal": 6,
+      "tooltip": true,
+      "tooltip-format": "Rofi: Application Launcher",
+      "return-type": "json"
+  },
 #+end_src
 
 Configuration for the tray module 
@@ -154,7 +155,7 @@ Configuration for the "hyprland/window" module
   "format": "Submap: {}"
 },
 #+end_src
-**** I/O
+**** I/O/
 Configuration for the idle_inhibitor module
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
 "idle_inhibitor": {

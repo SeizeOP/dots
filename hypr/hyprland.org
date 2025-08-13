@@ -451,6 +451,7 @@ similar to the =SUPER= + =CTRL= keybindings the below keybindings all use the =C
 	bind = CTRL ALT, B, exec, xdg-settings set default-web-browser brave-browser.desktop
 	bind = CTRL ALT, F, exec, xdg-settings set default-web-browser org.mozilla.firefox.desktop  
 	bind = CTRL ALT, M, exec, xdg-settings set default-web-browser mullvad-browser.desktop
+	bind = CTRL ALT, L, exec, xdg-settings set default-web-browser librewolf.desktop
 #+end_src
 
 Execute the default web browser
@@ -512,7 +513,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shadder file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-#####screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+#screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:
@@ -775,6 +776,7 @@ windowrulev2 = suppressevent maximize, class:.*
 Force YAD windows to float 
 #+begin_src conf :tangle hyprland.conf
 windowrulev2 = float,class:^(yad)$  
+windowrulev2 = float,class:^(waypaper)$  
 #+end_src
 
 ***** Workspace assignments
