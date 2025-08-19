@@ -4,17 +4,12 @@
     "text" : "Lock",
     "keybind" : "l"
 }
-{
-    "label" : "hypr-logout",
-    "action" : "sleep 1; hyprctl dispatch exit",
-    "text" : "Hypr Logout",
-    "keybind" : "h"
-}
+
 {
     "label" : "logout",
-    "action" : "sleep 1; loginctl terminate-user $USER",
-    "text" : "TTY Logout",
-    "keybind" : "e"
+    "action" : "~/Documents/scripts/bash/logout.sh",
+    "text" : "Logout",
+    "keybind" : "g"
 }
 
 {
@@ -23,12 +18,14 @@
     "text" : "Shutdown",
     "keybind" : "s"
 }
+
 {
     "label" : "suspend",
     "action" : "systemctl suspend",
     "text" : "Suspend",
     "keybind" : "u"
 }
+
 {
     "label" : "reboot",
     "action" : "systemctl reboot",

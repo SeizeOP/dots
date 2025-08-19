@@ -1,0 +1,125 @@
+#+title: wlogout config
+#+author: Henry Davies (HD)
+* TABLE OF CONTENTS :toc:noexport:
+- [[#layout][LAYOUT]]
+  - [[#lock][Lock]]
+  - [[#logout][Logout]]
+  - [[#shutdown][Shutdown]]
+  - [[#suspend][Suspend]]
+  - [[#reboot][Reboot]]
+- [[#css][CSS]]
+
+* LAYOUT
+** Lock
+#+begin_src json :tangle layout
+{
+    "label" : "lock",
+    "action" : "loginctl lock-session",
+    "text" : "Lock",
+    "keybind" : "l"
+}
+#+end_src
+
+** Logout
+#+begin_src json :tangle layout
+{
+    "label" : "logout",
+    "action" : "~/Documents/scripts/bash/logout.sh",
+    "text" : "Logout",
+    "keybind" : "g"
+}
+#+end_src
+
+** Shutdown
+#+begin_src json :tangle layout
+{
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Shutdown",
+    "keybind" : "s"
+}
+#+end_src
+
+** Suspend
+#+begin_src json :tangle layout
+{
+    "label" : "suspend",
+    "action" : "systemctl suspend",
+    "text" : "Suspend",
+    "keybind" : "u"
+}
+#+end_src
+
+** Reboot
+#+begin_src json :tangle layout
+{
+    "label" : "reboot",
+    "action" : "systemctl reboot",
+    "text" : "Reboot",
+    "keybind" : "r"
+}
+#+end_src
+
+* CSS
+
+#+begin_src css :tangle style.css
+ * {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+    border-radius: 6;
+    border-color: black;
+	text-decoration-color: #FFFFFF;
+    color: #FFFFFF;
+	background-color: #1E1E1E;
+	border-style: solid;
+	border-width: 1px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+}
+
+button:focus, button:active, button:hover {
+	background-color: #3700B3;
+	outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
+#+end_src
+
+* FOOTNOTES :noexport:
+#+STARTUP: inlineimages fold
+#+auto_tangle: t
+#+options: num:nil toc:2
+#+exclude_tags: noexport
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+export_file_name: ~/Documents/html/docs/wlogout-dracula.html
+#+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
+#+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
+#+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt] 

@@ -82,7 +82,6 @@ My personal emacs config has been inspired by many factors, and it would be to d
 - Distrotube: [[https://www.youtube.com/playlist?list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][Cofiguring Emacs]]
 - hlissner: [[https://github.com/doomemacs/doomemacs][DOOM Emacs]]
 
-
 * IMPORTANT PROGRAMS TO LOAD FIRST
 ** Elpacs Package Manager
 *** SETUP Elpaca
@@ -222,6 +221,14 @@ Set =SPC= as the global leader key, and make the global leader key available in 
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '(revert-buffer :wk "Reload buffer")
     "b R" '(revert-buffer-quick :wk "Reload buffer WITHOUT conformation"))
+#+end_src
+
+*** Comment
+#+begin_src emacs-lisp
+  (hd/leader-keys
+    "c" '(:ignore t :wk "comment")
+    "c r" '(comment-region :wk "Comment out selected region")
+    "c R" '(revert-buffer-quick :wk "Uncomment selected region"))
 #+end_src
 
 *** Dired
@@ -1081,25 +1088,42 @@ Until then i will use the /Doom Dracula/ theme instead.
 ** Initial Buffer Choice & Options 
 Disable the built-in /Emacs/ splash screen and set custom initial buffer
 #+begin_src emacs-lisp
-  (setq inhibit-startup-screen 1)
-  (setq initial-buffer-choice "~/.config/emacs/startup.org")
+    (setq inhibit-startup-screen 1)
+    (setq initial-buffer-choice "~/.config/emacs/startup.org")
 #+end_src 
 
 Make initial buffer read-only and disable line numbers
 #+begin_src emacs-lisp
-  (defun startup-buffer-configuration ()
-    (when (get-buffer "startup.org")
-      (with-current-buffer "startup.org"
-        (setq buffer-read-only t)
-        (setq display-line-numbers -1))))
-  (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
+ (defun startup-buffer-configuration ()
+   (when (get-buffer "startup.org")
+     (with-current-buffer "startup.org"
+       (setq buffer-read-only t)
+       (setq display-line-numbers -1))))
+ (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
 #+end_src 
 
+#+begin_src emacs-lisp
+  ;; (use-package dashboard
+  ;; :elpaca t
+  ;; :config
+  ;; (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  ;; (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+  ;; (dashboard-setup-startup-hook))
+
+  ;; (setq dashboard-startup-banner 'logo)
+  ;; (setq dashboard-center-content t)
+  ;; (setq dashboard-vertically-center-content t)
+  ;; (setq dashboard-items '((recents . 10)
+  ;; 			(bookmaks . 5)
+  ;; 			(projects . 5)
+  ;; 			(registers . )))
+#+end_src 
 * Footnotes :noexport:
 #+options: num:nil toc:2
+#+startup: inlineimages fold
 #+exclude_tags: noexport
 #+export_file_name: ~/Documents/html/docs/gnu-emacs-dracula.html
-#+startup: inlineimages fold
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>

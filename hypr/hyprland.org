@@ -45,7 +45,6 @@ To ensure that changes made in this file are saved to the [[./hyprland.conf][hyp
 2. tangle the contents of the source code blocks in this file to the [[./hyprland.conf][hyprland config]]. To do this we must run the command =org-babel-tangle= with the key combo =C-c C-v t=. this will copy the contents of all specified source code blocks into the [[./hyprland.conf][hyprland.conf]] file.
 3. Finally we must tell hyprland to reload its config file by running the =hyprctl reload= command.
    
-
 * ESSENTIAL PROGRAM CONFIGURATIONS 
 This section includes links to the configuration files used by /non Hyprland/ packages to create a functionally complete Hyprland Window Manager/Desktop Environment.
 
@@ -513,7 +512,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shadder file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-#screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+##################screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:
@@ -799,10 +798,11 @@ Assign Github windows to workspace 3
 windowrulev2 = workspace 3,title:^(GitHub)$  
 #+end_src
 
-Assign Jellyfin and Spotify windows to workspace 4
+Assign Jellyfin, Spotify, and Gapless windows to workspace 4
 #+begin_src conf :tangle hyprland.conf
 windowrulev2 = workspace 4,class:^(com.github.iwalton3.jellyfin-media-player)$  
 windowrulev2 = workspace 4,title:^(Spotify)$  
+windowrulev2 = workspace 4,class:^(com.github.neithern.g4music)$  
 #+end_src
 
 Assign steam to workspace 7
@@ -836,4 +836,5 @@ This example is not synced to my runnning config.
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
-
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt] 
