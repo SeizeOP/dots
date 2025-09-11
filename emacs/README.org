@@ -913,6 +913,18 @@ llama is a dependency of org-roam, and must have the repository manually specifi
     (:host github :repo "tarsius/llama" :branch "main" :files ("*.el" "out")))
 #+end_src
 
+**** Cond-let
+Cond-let is a dependency of orgroam
+#+begin_src emacs-lisp
+  (use-package cond-let
+    :ensure
+    (:host github :repo "tarsius/cond-let" :branch "main")
+    :after magit
+     ;;:ensure (:host github :repo "tarsius/cond-let" :files (:defaults "cond-let.el"))
+    ;; :after (magit) ; Example: If magit depends on cond-let, load cond-let first
+    ;; Any specific configuration for cond-let can go here
+    )
+#+end_src
 *** Org-roam UI
 a better interface for Org-roam Graphs.
 #+begin_src emacs-lisp

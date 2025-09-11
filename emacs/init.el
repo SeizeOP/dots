@@ -13,7 +13,9 @@
  '(org-safe-remote-resources
    '("\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(ace-window cfrs elfeed-goodies elfeed-org ht hydra magit
+		org-side-tree pfuture))
  '(safe-local-variable-values
    '(eval face-remap-add-relative 'default
 	  '(:family "Times New Roman" :height 120)
