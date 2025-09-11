@@ -743,9 +743,12 @@ general:layout = master
 **** Gestures
 Enable "workspace swipe"; to use the touchpad to move between Hyprland workspaces.
 #+begin_src conf :tangle hyprland.conf
-gestures {
-    workspace_swipe = on
-}
+  # Workspace swipe for Hyprland <- 0.50 
+  # gestures {
+  #    workspace_swipe = on
+  #}
+  # Workspace swipe for Hyprland 0.51 ->
+  gesture = 4, horizontal, workspace,
 #+end_src
 
 *** Window Rules
