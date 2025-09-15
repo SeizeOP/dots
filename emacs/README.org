@@ -49,6 +49,7 @@
   - [[#org-mpv-notes][org-mpv-notes]]
   - [[#org-roam][Org-roam]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+- [[#pdf-view-mode][PDF VIEW MODE]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#ctrl-c-fix][CTRL-C Fix]]
@@ -965,7 +966,13 @@ Org-tempo is not a seperate package but a module within org that can be enabled.
 #+begin_src emacs-lisp
 (require 'org-tempo)
 #+end_src
-
+* PDF VIEW MODE
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'pdf-view-mode-map
+ "C-H" 'pdf-annot-add-highlight-markup-annotation
+ "C-D" 'pdf-annot-delete)
+#+end_src
 * RAINBOW MODE
 Display the actual color as a background for any hex color value (ex. #ffffff). The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.
 
