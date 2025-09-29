@@ -15,7 +15,7 @@
 - [[#all-the-icons][ALL THE ICONS]]
   - [[#dired-support][Dired support]]
 - [[#auto-compete][AUTO-COMPETE]]
-  - [[#compnay][Compnay]]
+  - [[#company][Company]]
 - [[#buffer-move][BUFFER MOVE]]
   - [[#buf-move-up][buf-move-up]]
   - [[#buf-move-down][buf-move-down]]
@@ -61,7 +61,7 @@
   - [[#initial-buffer-choice--options][Initial Buffer Choice & Options]]
 
 * ABOUT THIS CONFIG
-This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefor I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are reivant to your own personal emacs config.
+This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefor I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are relevant to your own personal emacs config.
 
 ** External Dependencies
 - CMake: Needed for compiling some things
@@ -80,7 +80,7 @@ This is my personal /GNU Emacs/ literate configuration. I will do my best to cla
 My personal emacs config has been inspired by many factors, and it would be to difficult to enumerate all such factors. Therefor, I will Instead list bellow what i have deemed to be the foundational influences to my personal emacs config.
 
 - System Crafters: [[https://systemcrafters.net/emacs-from-scratch/][Emacs from Scratch]]
-- Distrotube: [[https://www.youtube.com/playlist?list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][Cofiguring Emacs]]
+- Distrotube: [[https://www.youtube.com/playlist?list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][Configuring Emacs]]
 - hlissner: [[https://github.com/doomemacs/doomemacs][DOOM Emacs]]
 
 * IMPORTANT PROGRAMS TO LOAD FIRST
@@ -208,7 +208,7 @@ Set =SPC= as the global leader key, and make the global leader key available in 
         :states '(normal visual emacs)
         :keymaps 'override
         :prefix "SPC" ;; set leader
-        :gloabal-prefix "C-SPC") ;; access leader in insert mode
+        :global-prefix "C-SPC") ;; access leader in insert mode
 #+end_src
 
 *** Buffers
@@ -233,7 +233,7 @@ Set =SPC= as the global leader key, and make the global leader key available in 
     "c u" '(insert-char :wk "Select and insert Unicode characters"))
 #+end_src
 
-**** Gloabal =insert-char= keybinding 
+**** Global =insert-char= keybinding 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x x") 'insert-char)
 #+end_src
@@ -302,7 +302,7 @@ Elfeed-tube commands
 *** Menus
 **** Exporting
 **** Export Markdown to PDF
-Create a custom funtion to directly export Markdown files to PDFs.
+Create a custom function to directly export Markdown files to PDFs.
 #+begin_src emacs-lisp
  (defun export-with-pandoc ()
   	    (interactive) 
@@ -313,7 +313,7 @@ Create a custom funtion to directly export Markdown files to PDFs.
 **** Org Export Dispatch
 Create a key binding for a simple orgmode export menu, like what is used in /DOOM Emacs/. 
 
-Additionally define the keybinding to be used with the custom markdown to PDF export fuction.
+Additionally define the keybinding to be used with the custom markdown to PDF export function.
 #+begin_src emacs-lisp
   (hd/leader-keys
     "m e" '(org-export-dispatch :wk "Export dispatcher for orgmode.")
@@ -371,7 +371,7 @@ Additionally define the keybinding to be used with the custom markdown to PDF ex
 #+end_src
     
 * WHICH KEY
-Provied hints for "which" key combination does what action.
+Provides hints for "which" key combination does /what/ action.
 #+begin_src emacs-lisp
 (use-package which-key
   :init
@@ -391,7 +391,7 @@ Provied hints for "which" key combination does what action.
              which-key-separator " → "))
 #+end_src
 * ALL THE ICONS
-This is an icon set that can be used with dashoard, dired, ibuffer and other Emacs programs.
+This is an icon set that can be used with dashboard, dired, ibuffer and other Emacs programs.
 #+begin_src emacs-lisp 
 (use-package all-the-icons
   :ensure t
@@ -414,8 +414,8 @@ Auto-Complete (a.k.a =auto-complete.el=, =auto-complete-mode=) is an extension t
 #+begin_src c=emacs-lisp
 (ac-config-default)
 #+end_src
-** Compnay
-use company for code competion
+** Company
+use company for code completion
 #+begin_src emacs-lisp
   (use-package company
     :config
@@ -586,6 +586,7 @@ Display the time and battery percentage in the modeline
   (setq emms-player-list '(emms-player-mpv))
   (setq emms-source-file-default-directory "~/Music/")
 #+end_src
+
 * ELFEED
 ** Elfeed
 #+begin_src emacs-lisp
@@ -681,6 +682,7 @@ Defining the various fonts that emacs will use
 #+begin_src emacs-lisp
 (setq org-src-fontify-natively t)
 #+end_src
+
 ** Zooming In/Out
 You can use the bindings CTRL plus =/- for zooming in/out. You can also use CTRL plus the mouse wheel for zooming in/out.
 #+begin_src emacs-lisp
@@ -727,7 +729,7 @@ Treemacs provides a simple graphical tree style file view for emacs. Below are t
     :ensure t)
 #+end_src
 
-*** Confiure Treemacs
+*** Configure Treemacs
 Start =treemacs-mode= in /Evil/ insert mode
 #+begin_src emacs-lisp
   (evil-set-initial-state 'treemacs-mode 'insert)
@@ -790,7 +792,7 @@ Provide local keybind overrides for next and previous line movement in =treemacs
         :custom
         (setq ivy-use-virtual-buffers t)
         (setq ivy-count-format "(%d/%d) ")
-        (setq enable-recursove-minibuffers t)
+        (setq enable-recursive-minibuffers t)
         :config
         (ivy-mode))
 #+end_src
@@ -810,7 +812,7 @@ Provide local keybind overrides for next and previous line movement in =treemacs
     :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x
     :custom
     (ivy-virtual-abbreviate 'full
-     ivy-ritch-switch-buffer-align-virtual-buffer t
+     ivy-rich-switch-buffer-align-virtual-buffer t
      ivy-rich-path-style 'abbrev)
     :config
     (ivy-set-display-transformer 'ivy-switch-buffer
@@ -826,9 +828,10 @@ Initialize the =multiple-cursors= package, and define keybindings
   :bind (("C->"   . mc/mark-next-like-this)
          ("C-M->" . mc/mark-all-like-this-dwim)))
 #+end_src
+
 * ORG MODE
 ** Auto Tangle 
-A simple package to automate the process of tangling orgmode source code blocks to thier respective output files. 
+A simple package to automate the process of tangling orgmode source code blocks to their respective output files. 
 
 Install =org-auto-tangle=
 #+begin_src emacs-lisp
@@ -845,11 +848,13 @@ Org mode source blocks have some really weird and annoying default indentation b
 #+begin_src emacs-lisp
 (electric-indent-mode -1)
 #+end_src
+
 ** Enable image scaling in orgmode
 Enable modifying the scale of a linked image in an *Orgmode* document using =#+ATTR_ORG:=.
 #+begin_src emacs-lisp
 (setq org-image-actual-width nil)
 #+end_src
+
 ** Enable Table of Contents
 #+begin_src emacs-lisp
   (use-package toc-org
@@ -875,14 +880,14 @@ bind the 'TAB' key to 'org-cycle'. This allows us to use the 'TAB' key in org-mo
 #+end_src
 
 ** Org-appear 
-The =org-appear= package provides the ability to toggle the visibility of hidden orgmode /emphasis/ markers for easier edditing.
+The =org-appear= package provides the ability to toggle the visibility of hidden orgmode /emphasis/ markers for easier editing.
 #+begin_src emacs-lisp
 (use-package org-appear) 
 (add-hook 'org-mode-hook 'org-appear-mode)
 #+end_src
 
 ** Org-inline-pdf
-enble =org-inline-pdf= mode at emacs launch
+enable =org-inline-pdf= mode at emacs launch
 #+begin_src emacs-lisp
 ;;  (use-package org-inline-pdf
 ;;    :ensure
@@ -944,6 +949,7 @@ Cond-let is a dependency of orgroam
     ;; Any specific configuration for cond-let can go here
     )
 #+end_src
+
 *** Org-roam UI
 a better interface for Org-roam Graphs.
 #+begin_src emacs-lisp
@@ -965,7 +971,7 @@ a better interface for Org-roam Graphs.
 #+end_src
 
 ** Source Code Block Tag Expansion
-Org-tempo is not a seperate package but a module within org that can be enabled. Org-tempo allows for '<s' followed by TAB to expand to a begin_src teg. Other expansions available include:
+Org-tempo is not a separate package but a module within org that can be enabled. Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag. Other expansions available include:
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 | Typing the below + TAB | Expands to ...                        |
@@ -973,7 +979,7 @@ Org-tempo is not a seperate package but a module within org that can be enabled.
 | <a                     | =#+BEGIN_EXPORT= ascii ... =#+END_EXPORT= |
 | <c                     | =#+BEGIN_CENTER= ... =#+END_CENTER=       |
 | <C                     | =#+BEGIN_COMMENT= ... =#+END_COMMENT=     |
-| <e                     | =#+BEGIN_EXPAMPLE= ... =#+END_EXAMPLE=    |
+| <e                     | =#+BEGIN_EXAMPLE= ... =#+END_EXAMPLE=    |
 | <E                     | =#+BEGIN_EXPORT= ... =#+END_EXPORT=       |
 | <h                     | =#+BEGIN_EXPORT= html ... =#+END_EXPORT=  |
 | <l                     | =#+BEGIN_EXPORT= latex ... =#+END_EXPORT= |
@@ -984,6 +990,7 @@ Org-tempo is not a seperate package but a module within org that can be enabled.
 #+begin_src emacs-lisp
 (require 'org-tempo)
 #+end_src
+
 * PDF VIEW MODE
 #+begin_src emacs-lisp
 (general-define-key
@@ -1017,7 +1024,7 @@ Eshell
 Eshell is an Emacs 'shell' that is written in Elisp.
 
 Make all eshell appear in a popup buffer. The /elisp/ below is a combination of the bellow sources to create a popup buffer to my liking. 
-- Creddit: [[https://old.reddit.com/r/emacs/comments/lrgah8/popup_terminaleshell_in_emacs/][Reddit]], *StackExchange*: [[https://emacs.stackexchange.com/questions/13579/how-to-open-shell-or-eshell-in-a-new-window-or-frame][Emacs Stackexchange]]
+- Credit: [[https://old.reddit.com/r/emacs/comments/lrgah8/popup_terminaleshell_in_emacs/][Reddit]], *StackExchange*: [[https://emacs.stackexchange.com/questions/13579/how-to-open-shell-or-eshell-in-a-new-window-or-frame][Emacs StackExchange]]
 #+begin_src emacs-lisp
 (setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-in-side-window (side . bottom))))
 #+end_src
@@ -1031,7 +1038,7 @@ Make all eshell appear in a popup buffer. The /elisp/ below is a combination of 
 #+end_src
 
 =eshell-rc-script= -- your profile for eshell; like a bashrc for eshell.
-=eshell-alias-file= -- set an alaises file for the eshell.
+=eshell-alias-file= -- set an aliases file for the eshell.
 #+begin_src emacs-lisp
   (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
         eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
@@ -1088,7 +1095,7 @@ vterm-toggle toggles between the vterm buffer and whatever buffer you are editin
 #+end_src
 
 * THEME
-The first of the two lines below designates the directory where we will place all of our themes. The second line loads our chosen theme which is *Sieze the night*, a theme that i created with the help of the [[https://mswift42.github.io/themecreator/][Emacs Theme Editor]].
+The first of the two lines below designates the directory where we will place all of our themes. The second line loads our chosen theme which is *Seize the night*, a theme that i created with the help of the [[https://mswift42.github.io/themecreator/][Emacs Theme Editor]].
 
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
@@ -1099,7 +1106,7 @@ The first of the two lines below designates the directory where we will place al
 ;; (load-theme 'seize-the-night t)
 #+end_src 
 
-*Update:* As of [2025-06-03 Tue] I have fully switched away from using my custo =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
+*Update:* As of [2025-06-03 Tue] I have fully switched away from using my custom =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
 ** Doom Themes
 Until then i will use the /Doom Dracula/ theme instead.
 #+begin_src emacs-lisp
