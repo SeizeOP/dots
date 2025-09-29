@@ -224,12 +224,18 @@ Set =SPC= as the global leader key, and make the global leader key available in 
     "b R" '(revert-buffer-quick :wk "Reload buffer WITHOUT conformation"))
 #+end_src
 
-*** Comment
+*** Character Insertion
 #+begin_src emacs-lisp
   (hd/leader-keys
     "c" '(:ignore t :wk "comment")
     "c r" '(comment-region :wk "Comment out selected region")
-    "c R" '(revert-buffer-quick :wk "Uncomment selected region"))
+    "c R" '(revert-buffer-quick :wk "Uncomment selected region")
+    "c u" '(insert-char :wk "Select and insert Unicode characters"))
+#+end_src
+
+**** Gloabal =insert-char= keybinding 
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x x") 'insert-char)
 #+end_src
 
 *** Dired
@@ -547,6 +553,18 @@ Enable Doom Modeline
 (use-package doom-modeline
 :ensure t
 :init (doom-modeline-mode 1))
+#+end_src
+
+Display the time and battery percentage in the modeline
+#+begin_src emacs-lisp
+  (use-package time
+    :ensure nil
+    :config
+    (display-time-mode 1)
+    :custom
+    (display-time-default-load-average nil)
+    (display-time-24hr-format t)
+    (display-battery-mode 1))
 #+end_src
 * Emms
 #+begin_src emacs-lisp
