@@ -61,20 +61,11 @@
   - [[#initial-buffer-choice--options][Initial Buffer Choice & Options]]
 
 * ABOUT THIS CONFIG
-This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefor I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are relevant to your own personal emacs config.
+This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefore, I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are relevant to your own personal emacs config.
 
 ** External Dependencies
 - CMake: Needed for compiling some things
 - JetBrains Mono
-- Org-roam dependencies (if not already installed):
-  1. dash
-  2. f
-  3. s
-  4. org 
-  5. emacsql
-  6. magit-selection
-- treemacs 
-- org-sidetree
 
 ** Inspiration
 My personal emacs config has been inspired by many factors, and it would be to difficult to enumerate all such factors. Therefor, I will Instead list bellow what i have deemed to be the foundational influences to my personal emacs config.
