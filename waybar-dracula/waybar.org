@@ -23,7 +23,7 @@ Personal Dracula theme for /Waybar/.
 {
 #+end_src
 ** Waybar Position
-Define the location, width, and hieght of /Waybar/
+Define the location, width, and height of /Waybar/
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
@@ -73,7 +73,7 @@ Select the modules to show on the right portion of /Waybar/
 #+end_src
 
 ** Module Definition
-This section will include the module configuration for each module included in the /Module Declation/ section. 
+This section will include the module configuration for each module included in the /Module Declaration/ section. 
 
 *** Modules Left 
 Configuration for the clock module 
@@ -375,7 +375,7 @@ This file defines all the colors I will use to style /Waybar/
 This file uses the colors from [[./colors.css][colors.css]] to style the modules of /Waybar/ to whatever look I want. 
 
 *** Import colors from =colors.css=
-Before I can style anything in the [[./style.css][style.css]] file; I need to imprt the pre-difined colors from [[./colors.css][colors.css]]  
+Before I can style anything in the [[./style.css][style.css]] file; I need to import the pre-defined colors from [[./colors.css][colors.css]]  
 #+begin_src css :tangle ~/dotfiles/waybar/style.css
 @import url("./colors.css");
 #+end_src
@@ -442,7 +442,7 @@ button:hover {
 #+end_src
 
 **** Mode 
-styling for submodes like window resizing or screenshot menus. I don't use this on Hyprland, but do on SwayWM.
+styling for sub-modes like window resizing or screenshot menus. I don't use this on Hyprland, but do on SwayWM.
 #+begin_src css :tangle ~/dotfiles/waybar/style.css
 
 
@@ -785,9 +785,9 @@ styling for submodes like window resizing or screenshot menus. I don't use this 
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+export_file_name: ~/Documents/html/docs/waybar-dracula.html
 
-1. specify the background color, and font color fo source code blocks
+1. specify the background color, and font color for source code blocks
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 
-2. Specify the background color of code blocks. In my case these somewhat interchangable with regualar quotes, as most of the extensive code is placed in source code blocks. 
+2. Specify the background color of code blocks. In my case these somewhat interchangeable with regular quotes, as most of the extensive code is placed in source code blocks. 
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
