@@ -315,6 +315,7 @@ Additionally define the keybinding to be used with the custom markdown to PDF ex
   (hd/leader-keys
     "o" '(:ignore t :wk "Open")
     "o b" '(browse-url-of-buffer :wk "Open the current buffer in the XDG default browser")
+    "o c" '(calendar :wk "Open Calendar")  
     "o l" '(browse-url-xdg-open :wk "Open a URL in the XDG default browser")
     "o s" '(org-side-tree :wk "Org Side-Tree")
     "o t" '(vterm-toggle :wk "Open Vterm")
