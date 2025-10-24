@@ -98,7 +98,7 @@ Configuration for the custom rofi module
   },
 #+end_src
 
-Configuration for the custom rofi module
+Configuration for the custom power module
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
   "custom/power": {
       "format": "⏻",
