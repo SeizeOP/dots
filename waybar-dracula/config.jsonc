@@ -9,11 +9,12 @@
 "spacing": 4, // Gaps between modules (4px)
 
 "modules-left": [
-       "clock",
-       "custom/rofi",
-       "tray",
-       "hyprland/workspaces",
-       "custom/media",
+    "clock",
+    "custom/power",
+    "custom/rofi",
+    "tray",
+    "hyprland/workspaces",
+    "custom/media",
     "hyprland/submap"
    ],
 
@@ -45,6 +46,15 @@
     "signal": 6,
     "tooltip": true,
     "tooltip-format": "Rofi: Application Launcher",
+    "return-type": "json"
+},
+
+"custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout",
+    "signal": 6,
+    "tooltip": true,
+    "tooltip-format": "Wlogout: Power menu",
     "return-type": "json"
 },
 

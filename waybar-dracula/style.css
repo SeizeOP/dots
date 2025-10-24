@@ -258,6 +258,12 @@ label:focus {
     padding: 1px 3px;
 }
 
+#custom-power {
+    background-color: @background;
+    color: @foreground;
+    padding: 1px 6px;
+}
+
 #custom-rofi {
     background-color: @background;
     color: @foreground;

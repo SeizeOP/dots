@@ -39,11 +39,12 @@ This section will name each module I want included on my /Waybar/; along with th
 Select the modules to show on the left portion of /Waybar/
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
   "modules-left": [
-         "clock",
-         "custom/rofi",
-         "tray",
-         "hyprland/workspaces",
-         "custom/media",
+      "clock",
+      "custom/power",
+      "custom/rofi",
+      "tray",
+      "hyprland/workspaces",
+      "custom/media",
       "hyprland/submap"
      ],
 #+end_src
@@ -93,6 +94,18 @@ Configuration for the custom rofi module
       "signal": 6,
       "tooltip": true,
       "tooltip-format": "Rofi: Application Launcher",
+      "return-type": "json"
+  },
+#+end_src
+
+Configuration for the custom rofi module
+#+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
+  "custom/power": {
+      "format": "⏻",
+      "on-click": "wlogout",
+      "signal": 6,
+      "tooltip": true,
+      "tooltip-format": "Wlogout: Power menu",
       "return-type": "json"
   },
 #+end_src
@@ -685,6 +698,15 @@ styling for sub-modes like window resizing or screenshot menus. I don't use this
     #custom-media.custom-mpv {
         color: @purple;
         padding: 1px 3px;
+    }
+#+end_src
+
+***** Power
+#+begin_src css :tangle ~/dotfiles/waybar/style.css
+     #custom-power {
+        background-color: @background;
+        color: @foreground;
+        padding: 1px 6px;
     }
 #+end_src
 
