@@ -64,6 +64,7 @@ This section includes links to the configuration files used by /non Hyprland/ pa
 *Essential* environment variables
 #+begin_src conf :tangle hyprland.conf
   env = WLR_NO_HARDWARE_CURSORS,1
+env=ELECTRON_OZONE_PLATFORM_HINT,auto
   $mainMod = SUPER
   $terminal = kitty
   $menu = rofi -show combi -combi-modi drun,run,recursivebrowser 
@@ -274,6 +275,11 @@ bind = $mainMod $shiftMod, L, exec, hyprlock
 Keybinding for Wlogout
 #+begin_src conf :tangle hyprland.conf
 bind = $mainMod TAB, W, exec, wlogout
+#+end_src
+
+Keybinding for Kando
+#+begin_src conf :tangle hyprland.conf
+  bind = CTRL, Space, global, menu.kando.Kando:example-menu
 #+end_src
 
 *** Layout
@@ -516,7 +522,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shader file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-########screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+#screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:
@@ -785,6 +791,16 @@ windowrulev2 = float,class:^(yad)$
 windowrulev2 = float,class:^(waypaper)$  
 #+end_src
 
+***** Kando
+#+begin_src conf :tangle hyprland.conf
+windowrule = noblur, class:kando
+windowrule = opaque, class:kando
+windowrule = size 100% 100%, class:kando
+windowrule = noborder, class:kando
+windowrule = noanim, class:kando
+windowrule = float, class:kando
+windowrule = pin, class:kando
+#+end_src
 ***** Workspace assignments
 Assign Yad windows to workspace 1
 #+begin_src conf :tangle hyprland.conf

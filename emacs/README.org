@@ -212,7 +212,8 @@ Set =SPC= as the global leader key, and make the global leader key available in 
     "b n" '(next-buffer :wk "Next buffer")
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '(revert-buffer :wk "Reload buffer")
-    "b R" '(revert-buffer-quick :wk "Reload buffer WITHOUT conformation"))
+    "b R" '(revert-buffer-quick :wk "Reload buffer WITHOUT conformation")
+    "b s" '(scratch-buffer :wk "Scratch buffer"))
 #+end_src
 
 *** Character Insertion
@@ -235,6 +236,7 @@ Set =SPC= as the global leader key, and make the global leader key available in 
     "d" '(:ignore t :wk "Dired")
     "d d" '(dired :wk "dired"))
 #+end_src
+
 
 *** Elfeed
 #+begin_src emacs-lisp
@@ -587,6 +589,7 @@ Display the time and battery percentage in the modeline
     :ensure (:wait t)
     :commands (elfeed))
 #+end_src
+
 ** Elfeed-goodies
 #+begin_src emacs-lisp
 (package-install 'elfeed-goodies)
@@ -675,6 +678,21 @@ Defining the various fonts that emacs will use
 (setq org-src-fontify-natively t)
 #+end_src
 
+*** Orgmode fontfaces 
+Default Orgmode to ~Open Dyslexic~ fonts
+#+begin_src emacs-lisp
+;;(add-hook 'org-mode-hook (lambda () (set-frame-font "Open Dyslexic" t)))
+  (add-hook 'org-mode-hook (lambda () 
+  			   (setq buffer-face-mode-face '(:family "Open Dyslexic"))
+  			   (buffer-face-mode)))
+#+end_src
+
+Exclude Orgmode codeblocks and tables from ~Open Dyslexic~ font selection
+#+begin_src emacs-lisp
+(set-face-attribute 'org-block nil :font "Source Code Pro" :height 112)
+(set-face-attribute 'org-src nil :font "Source Code Pro" :height 112)
+#+end_src
+
 ** Zooming In/Out
 You can use the bindings CTRL plus =/- for zooming in/out. You can also use CTRL plus the mouse wheel for zooming in/out.
 #+begin_src emacs-lisp
@@ -682,7 +700,6 @@ You can use the bindings CTRL plus =/- for zooming in/out. You can also use CTRL
   (global-set-key (kbd "C--") 'text-scale-decrease)
   (global-set-key (kbd "C-<wheel-up>") 'text-scale-increase)
   (global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
-
 #+end_src
 
 * GRAPHICAL USER INTERFACE TWEAKS
@@ -1155,11 +1172,16 @@ Make initial buffer read-only and disable line numbers
   ;; 			(registers . )))
 #+end_src 
 * Footnotes :noexport:
-#+options: num:nil toc:2
+#+options: num:nil toc:2 
 #+startup: inlineimages fold
 #+exclude_tags: noexport
 #+export_file_name: ~/Documents/html/docs/gnu-emacs-dracula.html
+
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
+
+# Local Variables:
+# eval: (display-line-numbers-mode -1)
+# End:
