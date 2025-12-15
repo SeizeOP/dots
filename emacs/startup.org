@@ -42,3 +42,6 @@
 |---+------------+-----------------------------------------------------|
 
 #+STARTUP: inlineimages
+# Local Variables:
+# eval: (display-line-numbers-mode -1)
+# End:
