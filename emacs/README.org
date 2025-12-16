@@ -694,7 +694,7 @@ Exclude Orgmode codeblocks and tables from ~Open Dyslexic~ font selection
 
 #+begin_src emacs-lisp
 (set-face-attribute 'org-block nil :font "Source Code Pro" :height 112)
-(setq org-src-block0faces
+(setq org-src-block-faces
 	'((emacs-lisp (:font "Source Code Pro" :height 112))))
 #+end_src
 
