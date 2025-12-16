@@ -678,24 +678,27 @@ Defining the various fonts that emacs will use
 (setq org-src-fontify-natively t)
 #+end_src
 
-*** Orgmode fontfaces 
+*** Orgmode Font Faces 
 Default Orgmode to ~Open Dyslexic~ fonts
 #+begin_src emacs-lisp
-;;(add-hook 'org-mode-hook (lambda () (set-frame-font "Open Dyslexic" t)))
   (add-hook 'org-mode-hook (lambda () 
   			   (setq buffer-face-mode-face '(:family "Open Dyslexic"))
   			   (buffer-face-mode)))
 #+end_src
 
-Exclude Orgmode codeblocks and tables from ~Open Dyslexic~ font selection
+Orgmode font overrides
 #+begin_src emacs-lisp
-(set-face-attribute 'org-table nil :font "Source Code Pro" :height 112)
+  (add-hook 'org-mode-hook (lambda ()
+  			   (custom-set-faces
+  			    '(org-table ((t (:font "Source Code Pro" :height 112))))
+  			    '(org-block ((t (:font "Source Code Pro" :height 112)))))))
+  	  ;; (set-face-attribute 'org-table nil :font "Source Code Pro" :height 112)
 #+end_src
 
 #+begin_src emacs-lisp
-(set-face-attribute 'org-block nil :font "Source Code Pro" :height 112)
-(setq org-src-block-faces
-	'((emacs-lisp (:font "Source Code Pro" :height 112))))
+;;(set-face-attribute 'org-block nil :font "Source Code Pro" :height 112)
+;;(setq org-src-block-faces
+;;	'((emacs-lisp (:font "Source Code Pro" :height 112))))
 #+end_src
 
 ** Zooming In/Out
