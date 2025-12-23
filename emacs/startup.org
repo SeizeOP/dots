@@ -3,7 +3,6 @@
 
 * IMPORTANT KEYBINDINGS [[file:./images/emacs-start-page-urgent.png]] 
 |-----------+---------------------+------------------------------------|
-| M-x       | [[elisp:(counsel-M-x)][counsel-M-x]]         | Prompt for Emacs programs          |
 | SPC .     | [[elisp:(counsel-find-file)][counsel-find-file]]   | Find a file                        |
 | SPC f r   | [[elisp:(counsel-recentf)][counsel-recentf]]     | Find a Recent file                 |
 | SPC f c   | [[elisp:(find-file (concat (getenv "HOME") "/dotfiles/emacs/README.org"))][README.org]]          | Open Personal /Emacs/ [[./README.org][config]]         |
@@ -38,10 +37,11 @@
 ** Waybar Configs
 |---+------------+-----------------------------------------------------|
 | =1= | [[elisp:(find-file (concat (getenv "HOME") "/.config/waybar/waybar.org"))][waybar.org]] | This is the *main user configuration* file for Waybar |
-| =2= | [[elisp:(find-file (concat (getenv "HOME") "/.config/waybar/style.css"))][style.css]]  | This is the /CSS/ style configuration file for Waybar |
 |---+------------+-----------------------------------------------------|
 
-#+STARTUP: inlineimages
+ 
 # Local Variables:
 # eval: (display-line-numbers-mode -1)
+# eval: (org-display-inline-images)
+# eval: (read-only-mode t)
 # End:

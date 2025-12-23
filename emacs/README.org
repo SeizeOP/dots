@@ -8,7 +8,7 @@
   - [[#external-dependencies][External Dependencies]]
   - [[#inspiration][Inspiration]]
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
-  - [[#elpacs-package-manager][Elpacs Package Manager]]
+  - [[#elpaca-package-manager][Elpaca Package Manager]]
   - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
 - [[#which-key][WHICH KEY]]
@@ -75,7 +75,7 @@ My personal emacs config has been inspired by many factors, and it would be to d
 - hlissner: [[https://github.com/doomemacs/doomemacs][DOOM Emacs]]
 
 * IMPORTANT PROGRAMS TO LOAD FIRST
-** Elpacs Package Manager
+** Elpaca Package Manager
 *** SETUP Elpaca
 #+begin_src emacs-lisp
   (defvar elpaca-installer-version 0.11)
@@ -385,6 +385,7 @@ Provides hints for "which" key combination does /what/ action.
              which-key-allow-imprecise-window-fit 1
              which-key-separator " → "))
 #+end_src
+
 * ALL THE ICONS
 This is an icon set that can be used with dashboard, dired, ibuffer and other Emacs programs.
 #+begin_src emacs-lisp 
@@ -684,6 +685,7 @@ Default Orgmode to ~Open Dyslexic~ fonts
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook (lambda () 
   			   (setq buffer-face-mode-face '(:family "Open Dyslexic"))
+  			   ;;(setq buffer-face-mode-face '(:family "Times New Roman"))
   			   (buffer-face-mode)))
 #+end_src
 
@@ -1162,12 +1164,13 @@ Disable the built-in /Emacs/ splash screen and set custom initial buffer
 
 Make initial buffer read-only and disable line numbers
 #+begin_src emacs-lisp
- (defun startup-buffer-configuration ()
-   (when (get-buffer "startup.org")
-     (with-current-buffer "startup.org"
-       (setq buffer-read-only t)
-       (setq display-line-numbers -1))))
- (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
+  (defun startup-buffer-configuration ()
+    (when (get-buffer "startup.org")
+      (with-current-buffer "startup.org"
+        (setq buffer-read-only t)
+        (setq org-display-inline-images t)
+        (setq display-line-numbers-mode -1))))
+  (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
 #+end_src 
 
 #+begin_src emacs-lisp
