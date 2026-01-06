@@ -274,7 +274,7 @@ Elfeed-tube commands
     "f c" '((lambda () (interactive) (find-file "~/dotfiles/emacs/README.org")) :wk "Edit Emacs config")
     "f f" '(query-replace-regexp :wk "Query Replace (regexp)")
     "f h" '((lambda () (interactive) (find-file "~/dotfiles/hypr/hyprland.org")) :wk "Edit Hyprland config")
-    "f h" '((lambda () (interactive) (find-file "~/dotfiles/niri/niri.org")) :wk "Edit Niri config")
+    "f n" '((lambda () (interactive) (find-file "~/dotfiles/niri/niri.org")) :wk "Edit Niri config")
     "f q" '(qrencode-export-buffer-to-file :wk "Export qrcode buffers to a file")
     "f r" '(counsel-recentf :wk "Find recent files")
     "f w" '((lambda () (interactive) (find-file "~/dotfiles/waybar/waybar.org")) :wk "Edit Waybar config"))
