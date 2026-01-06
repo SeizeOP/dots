@@ -280,9 +280,6 @@ Elfeed-tube commands
     "f w" '((lambda () (interactive) (find-file "~/dotfiles/waybar/waybar.org")) :wk "Edit Waybar config"))
 #+end_src
 
-#+begin_src emacs-lisp
-#+end_src
-
 *** Help
 #+begin_src emacs-lisp
   (hd/leader-keys
