@@ -92,7 +92,7 @@ Autostarts are programs which are executed when Hyprland starts. Bellow are the 
 *** Necessary for proper system functionality
 **** KDE Policy Kit
 #+begin_src conf :tangle hyprland.conf
-exec-once = systemctl --user start plasma-polkit-agent
+exec-once = systemctl --user start hyprpolkitagent
 #+end_src
 
 **** Waybar and NMapplet
@@ -275,11 +275,6 @@ bind = $mainMod $shiftMod, L, exec, hyprlock
 Keybinding for Wlogout
 #+begin_src conf :tangle hyprland.conf
 bind = $mainMod TAB, W, exec, wlogout
-#+end_src
-
-Keybinding for Kando
-#+begin_src conf :tangle hyprland.conf
-  bind = CTRL, Space, global, menu.kando.Kando:example-menu
 #+end_src
 
 *** Layout
@@ -522,7 +517,7 @@ Enable rounding of window corners
 **** Shaders
 Enable a screen shader based on the provided shader file. In this case the provided file is a shader file which enables a greyscale effect. 
 #+begin_src conf :tangle hyprland.conf
-##screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
+########screen_shader = ~/dotfiles/hypr/shaders/greyscale-shader.glsl
 #+end_src
 
 bellow is an example of this shader in action:
@@ -559,7 +554,7 @@ general {
     col.inactive_border = rgba(44475aaa)
     col.nogroup_border = rgba(282a36dd)
     col.nogroup_border_active = rgb(bd93f9) rgb(44475a) 90deg
-    no_border_on_floating = false
+ #    no_border_on_floating = false
     border_size = 2
 #+end_src
 
@@ -773,34 +768,42 @@ windowrulev2 = float,class:^(kitty)$,title:^(kitty)$=
 #+end_src
 See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-**** V2 Window Rules
+**** Window Rules
 Check if a window is xwayland
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = bordercolor rgb(ff5555),xwayland:1 
+windowrule {
+  name = xwayland
+  border_color = rgb(ff5555)
+  match:xwayland = 1
+}
 #+end_src
 
 You'll probably like this.
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = suppressevent maximize, class:.* 
+windowrule {
+  name = windowrule-2
+  suppress_event = maximize
+  match:class = .*
+}
 #+end_src
 
 ***** Floats
 Force YAD windows to float 
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = float,class:^(yad)$  
-windowrulev2 = float,class:^(waypaper)$  
+windowrule {
+  name = float-yad
+  float = on
+  workspace = 1
+  match:class = ^(yad)$
+}
+
+windowrule {
+  name = float-waypaper
+  float = on
+  match:class = ^(waypaper)$
+}
 #+end_src
 
-***** Kando
-#+begin_src conf :tangle hyprland.conf
-windowrule = noblur, class:kando
-windowrule = opaque, class:kando
-windowrule = size 100% 100%, class:kando
-windowrule = noborder, class:kando
-windowrule = noanim, class:kando
-windowrule = float, class:kando
-windowrule = pin, class:kando
-#+end_src
 ***** Workspace assignments
 Assign Yad windows to workspace 1
 #+begin_src conf :tangle hyprland.conf
@@ -809,45 +812,89 @@ windowrulev2 = workspace 1,class:^(yad)$
 
 Assign personal website to workspace 1
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 2,title:^(HD's Personal Documentation)$  
+windowrule {
+  name = windowrule-6
+  workspace = 2
+  match:title = ^(HD's Personal Documentation)$
+}
 #+end_src
+
 Assign Emacs windows to workspace 3
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 3,class:^(emacs)$  
+windowrule {
+  name = emac-workspace
+  workspace = 3
+  match:class = ^(emacs)$
+}
 #+end_src
 
 Assign Github windows to workspace 3
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 3,title:^(GitHub)$  
+windowrule {
+  name = github-workspace
+  workspace = 3
+  match:title = ^(GitHub)$
+}
 #+end_src
 
 Assign Jellyfin, Spotify, and Gapless windows to workspace 4
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 4,class:^(com.github.iwalton3.jellyfin-media-player)$  
-windowrulev2 = workspace 4,title:^(Spotify)$  
-windowrulev2 = workspace 4,class:^(spotify)$  
-windowrulev2 = workspace 4,class:^(com.github.neithern.g4music)$  
+windowrule {
+  name = jellyfin-workspace
+  workspace = 4
+  match:class = ^(com.github.iwalton3.jellyfin-media-player)$
+}
+
+windowrule {
+  name = spotify-workspace
+  workspace = 4
+  match:title = ^(Spotify)$
+}
+
+windowrule {
+  name = spotify-workspace
+  workspace = 4
+  match:class = ^(spotify)$
+}
+
+windowrule {
+  name = gapless-workspace
+  workspace = 4
+  match:class = ^(com.github.neithern.g4music)$
+}
 #+end_src
 
 Assign Discord to workspace 5
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 5,class:^(vesktop)$  
+windowrule {
+  name = vesktop-workspace
+  workspace = 5
+  match:class = ^(vesktop)$
+}
 #+end_src
 
 Assign Steam to workspace 7
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 7,class:^(steam)$  
+windowrule {
+  name = steam-workspace
+  workspace = 7
+  match:class = ^(steam)$
+}
 #+end_src
 
 Assign librewolf to workspace 8
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = workspace 8,class:^(librewolf)$  
+windowrule {
+  name = lirewolf-workspace
+  workspace = 8
+  match:class = ^(librewolf)$
+}
 #+end_src
 
 ***** Screen sharing privacy
 #+begin_src conf :tangle hyprland.conf
-windowrulev2 = noscreenshare, class:^(org.keepassxc.KeePassXC)
-windowrulev2 = noscreenshare, class:^(com.belmoussaoui.Authenticator)
+windowrule = no_screen_share on, match:class ^(org.keepassxc.KeePassXC)
+windowrule = no_screen_share on, match:class ^(com.belmoussaoui.Authenticator)
 #+end_src
 
 * FOOTNOTES :noexport:
