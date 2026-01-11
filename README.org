@@ -13,4 +13,4 @@ For example:
 One notable exeption to this naming convention is, I have named my emacs config ~README.org~ instead of ~emacs.org~. The reason I have named the emacs this way is because Github only automatically expands orgmode or markdown files if they are named README, and given the complexity of my emacs config I wanted the orgmode document to auto expand for better readability.
 
 * Setup Script
-For those who want a more automated setup process for dotfiles in this repository, checkout my [[https://github.com/SeizeOP/scripts/bash/setup.sh][setup script]].
+For those who want a more automated setup process for dotfiles in this repository, checkout my [[https://github.com/SeizeOP/scripts/blob/main/bash/setup.sh][setup script]].
