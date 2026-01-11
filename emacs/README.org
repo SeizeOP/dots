@@ -295,10 +295,15 @@ Elfeed-tube commands
 **** Export Markdown to PDF
 Create a custom function to directly export Markdown files to PDFs.
 #+begin_src emacs-lisp
- (defun export-with-pandoc ()
-  	    (interactive) 
-  	    (when buffer-file-name 
-  	      (shell-command (concat "pandoc -f markdown -t pdf -o ~/Documents/output.pdf " (shell-quote-argument buffer-file-name)))))
+    (defun export-with-pandoc ()
+     	    (interactive) 
+     	    (when buffer-file-name 
+     	      (shell-command (concat "pandoc -f markdown -t pdf -o ~/Documents/output.pdf " (shell-quote-argument buffer-file-name)))))
+#+end_src
+
+Convert the current buffer's content from markdown to orgmode format, and save it with the current buffer's filename but with the .org extension.
+#+begin_src emacs-lisp
+;;  (defun markdown−convert−buffer−to−org()""(interactive)(shell−command−on−region(point−min)(point−max)(format "pandoc −f markdown −t org −o (concat(file−name−sans−extension(buffer−file−name))".org"))))
 #+end_src
 
 **** Org Export Dispatch

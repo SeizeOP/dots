@@ -82,7 +82,7 @@ Configuration for the clock module
   "clock": {
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
       //"format-alt": "{:%Y-%m-%d}",
-      "on-click": "$HOME/dotfiles/waybar/scripts/time-notif.sh"
+      "on-click": "$HOME/scripts/time-notif.sh"
   },
 #+end_src
 
@@ -90,7 +90,7 @@ Configuration for the custom rofi module
 #+begin_src jsonc :tangle ~/dotfiles/waybar/config.jsonc
   "custom/rofi": {
       "format": "󱓟",
-      "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
+      "on-click": "$HOME/scripts/rofi.sh",
       "signal": 6,
       "tooltip": true,
       "tooltip-format": "Rofi: Application Launcher",
