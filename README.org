@@ -1,8 +1,5 @@
 #+author: Henry Davies
 #+title: Dotfiles README
-
-* Personal Configuration File /(Dotfile)/ Repository. 
-
 Files which end in the =org= file extension are orgmode literate configs, and do not contain the actual configuration files for a given program. Rather these orgmode files contain source code blocks which are tangled /(or pushed)/ to the proper configuration files on demand. 
 
 To reduce confusion, the =org= files in each subdirectory have been named according to the program it relates to. 
