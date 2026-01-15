@@ -24,7 +24,7 @@
 #+begin_src json :tangle layout
 {
     "label" : "logout",
-    "action" : "~/Documents/scripts/bash/logout.sh",
+    "action" : "~/scripts/bash/logout.sh",
     "text" : "Logout",
     "keybind" : "g"
 }
