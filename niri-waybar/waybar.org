@@ -81,7 +81,7 @@ Configuration for the clock module
   "clock": {
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
       //"format-alt": "{:%Y-%m-%d}",
-      "on-click": "$HOME/dotfiles/waybar/scripts/time-notif.sh"
+      "on-click": "$HOME/scripts/bash/time-notif.sh"
   },
 #+end_src
 
@@ -101,7 +101,7 @@ Configuration for the custom rofi module
 #+begin_src jsonc :tangle ~/dotfiles/niri-waybar/config.jsonc
     "custom/rofi": {
         "format": "󱓟",
-        "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
+        "on-click": "$HOME/scripts/bash/rofi.sh",
         "signal": 6,
         "tooltip": false,
         "return-type": "json"
@@ -151,8 +151,8 @@ Configuration for the "custom/media" module
         },
         "escape": true,
 	"on-click": "playerctl play-pause",	    
-        "exec": "$HOME/dotfiles/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "exec": "$HOME/scripts/python/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/scripts/python/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
 #+end_src
 *** Modules Center
