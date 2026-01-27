@@ -63,9 +63,12 @@
 This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefore, I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are relevant to your own personal emacs config.
 
 ** External Dependencies
+*** Programs
 - CMake: Needed for compiling some things
+- libvterm and libtool: for Vterm support
+*** Fonts
 - JetBrains Mono
-
+- Source Code Pro
 ** Inspiration
 My personal emacs config has been inspired by many factors, and it would be to difficult to enumerate all such factors. Therefor, I will Instead list bellow what i have deemed to be the foundational influences to my personal emacs config.
 
@@ -1083,7 +1086,7 @@ Make all eshell appear in a popup buffer. The /elisp/ below is a combination of 
 #+begin_src emacs-lisp
   (use-package vterm
     :config
-  (setq shell-file-name "/bin/bash" 
+  (setq vterm-shell "/usr/bin/fish" 
         vterm-max-scrollback 5000))
   (evil-set-initial-state 'vterm-mode 'insert)
 #+end_src

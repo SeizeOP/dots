@@ -13,21 +13,21 @@
  '(org-safe-remote-resources
    '("\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
- '(package-selected-packages
-   '(ace-window cfrs elfeed-goodies elfeed-org ht hydra magit
-		org-side-tree pfuture))
+ '(package-selected-packages nil)
  '(safe-local-variable-values
-   '(eval face-remap-add-relative 'default
-	  '(:family "Times New Roman" :height 120)
-	  '(eval face-remap-add-relative 'default
-		 '(:family "OpenDyslexic" :height 120)))))
+   '((eval read-only-mode t) (eval org-display-inline-images) eval
+     face-remap-add-relative 'default
+     '(:family "Times New Roman" :height 120)
+     '(eval face-remap-add-relative 'default
+	    '(:family "OpenDyslexic" :height 120)))))
 ;; org-roam-db locations are not included in this copy of the init.el hoever these can be added back later.
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-block ((t (:font "Source Code Pro" :height 112))))
+ '(org-table ((t (:font "Source Code Pro" :height 112)))))
 (defun remove-scratch-buffer ()
   (if (get-buffer "elpaca-log")
       (kill-buffer "elpaca-log")))
