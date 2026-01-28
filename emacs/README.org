@@ -1,6 +1,6 @@
 #+author: Henry Davies
 #+title: HD's GNU Emacs Configuration
- [[./images/emacs-org.png]] 
+ [[file:~/dotfiles/images/emacs-org.png]] 
 
 * TABLE OF CONTENTS :toc:noexport:
 - [[#about-this-config][ABOUT THIS CONFIG]]
