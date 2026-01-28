@@ -1,0 +1,5 @@
+alias ... cd ../.. $*
+alias scripts cd ~/scripts/ 
+alias dots cd ~/dotfiles/
+alias ll ls -la $*
+alias la ls -a $*
