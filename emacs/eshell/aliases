@@ -3,3 +3,5 @@ alias scripts cd ~/scripts/
 alias dots cd ~/dotfiles/
 alias ll ls -la $*
 alias la ls -a $*
+alias less view-file-other-window $@*
+alias edit find-file-other-window $@*

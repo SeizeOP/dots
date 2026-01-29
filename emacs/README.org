@@ -35,6 +35,7 @@
   - [[#file-trees-and-menus][File trees and menus]]
   - [[#line-numbers][Line Numbers]]
   - [[#disable-symlink-to-git-directory-popup-dialog][Disable Symlink to Git directory popup dialog]]
+  - [[#yafold][Yafold]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#org-mode][ORG MODE]]
@@ -803,6 +804,13 @@ Provide local keybind overrides for next and previous line movement in =treemacs
 *** Set Git as the preferred version control backend /(for speed)/
 #+begin_src emacs-lisp
 (setq vc-handled-backends '(Git))
+#+end_src
+** Yafold
+Provides folding for code blocks based on indentation
+#+begin_src emacs-lisp
+  (use-package yafolding
+    :ensure t
+    :hook prog-mode shell-script-mode)
 #+end_src
 * IVY (COUNSEL)
 - Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
