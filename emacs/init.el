@@ -11,7 +11,8 @@
  '(org-cycle-inline-images-display nil)
  '(org-hide-emphasis-markers t)
  '(org-safe-remote-resources
-   '("\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
+   '("\\`https://fniessen\\.github\\.io/org-html-themes/org/html-theme-readtheorg\\.setup\\'"
+     "\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
  '(package-selected-packages nil)
  '(safe-local-variable-values

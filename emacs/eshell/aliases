@@ -1,7 +1,8 @@
 alias ... cd ../.. $*
 alias scripts cd ~/scripts/ 
 alias dots cd ~/dotfiles/
-alias ll ls -la $*
-alias la ls -a $*
+alias la ls -Ah $*
+alias ll ls -lAh $*
+alias ls ls -BAh $*
 alias less view-file-other-window $@*
 alias edit find-file-other-window $@*

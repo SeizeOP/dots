@@ -1069,14 +1069,16 @@ Make all eshell appear in a popup buffer. The /elisp/ below is a combination of 
 (setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-in-side-window (side . bottom))))
 #+end_src
 
+*** Eshell syntax highlighting
 =eshell-syntax-highlighting= -- adds fish/zsh-like syntax highlighting.
 #+begin_src emacs-lisp
   (use-package eshell-syntax-highlighting
-    :after esh-mode
+    :after eshell-mode
     :config
     (eshell-syntax-highlighting-global-mode 1))
 #+end_src
 
+*** Eshell Configuration 
 =eshell-rc-script= -- your profile for eshell; like a bashrc for eshell.
 =eshell-alias-file= -- set an aliases file for the eshell.
 #+begin_src emacs-lisp
@@ -1088,6 +1090,12 @@ Make all eshell appear in a popup buffer. The /elisp/ below is a combination of 
         eshell-scroll-to-bottom-on-input t
         eshell-destroy-buffer-when-process-dies t
         eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+#+end_src
+
+*** Customize eshell =$PATH=
+#+begin_src emacs-lisp
+  (add-to-list 'exec-path "/home/linuxbrew/.linuxbrew/bin/")
+  (add-to-list 'exec-path "/home/linuxbrew/.linuxbrew/sbin/")
 #+end_src
 
 ** Vterm
@@ -1209,7 +1217,7 @@ Make initial buffer read-only and disable line numbers
 #+exclude_tags: noexport
 #+export_file_name: ~/Documents/html/docs/gnu-emacs-dracula.html
 
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/html-theme-readtheorg.setup
 #+HTML_HEAD: <style>pre.src{background:#282a36;color:white;} </style>
 #+HTML_HEAD: <style>code{background:#f8f8f2;color:#6272a4;} </style>
 #+HTML_HEAD: <style>ul{background:#f8f8f2;} </style>
