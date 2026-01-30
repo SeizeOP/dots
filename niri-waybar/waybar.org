@@ -12,7 +12,7 @@
 * About 
 #+attr_html: :width 800px :align center
 Personal Dracula theme for /Waybar/.  
-[[file:./images/bar-demo.png]]
+[[file:./../images/waybar-dracula-demo.png]]
 * CONFIG
 #+begin_src jsonc :tangle ~/dotfiles/niri-waybar/config.jsonc
  //-*- mode: jsonc -*-
