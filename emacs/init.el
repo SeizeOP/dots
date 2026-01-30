@@ -14,7 +14,7 @@
    '("\\`https://fniessen\\.github\\.io/org-html-themes/org/html-theme-readtheorg\\.setup\\'"
      "\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
- '(package-selected-packages nil)
+ '(package-selected-packages '(elfeed-goodies elfeed-org))
  '(safe-local-variable-values
    '((eval read-only-mode t) (eval org-display-inline-images) eval
      face-remap-add-relative 'default

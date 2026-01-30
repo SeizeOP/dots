@@ -1052,12 +1052,12 @@ Fix to allow the =CTRL C= key combination to be used to terminate a process in s
 
 Vterm
 #+begin_src emacs-lisp
-;;(define-key vterm-mode-map (kbd "C-c") 'vterm-send-C-c)
+(general-define-key :keymaps 'vterm-mode-map :states '(insert) "C-c" 'vterm-send-C-c)
 #+end_src
 
 Eshell
 #+begin_src emacs-lisp
-;;(define-key eshell-mode-map (kbd "C-c") 'eshell-interupt-process)
+  (general-define-key :keymaps 'eshell-mode-map :states '(insert) "C-c" 'eshell-kill-process)
 #+end_src
 
 ** Eshell
@@ -1154,7 +1154,7 @@ The first of the two lines below designates the directory where we will place al
 ;; (load-theme 'seize-the-night t)
 #+end_src 
 
-*Update:* As of [2025-06-03 Tue] I have fully switched away from using my custom =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
+*Update:* As of 2025-06-03 I have fully switched away from using my custom =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
 ** Doom Themes
 Until then i will use the /Doom Dracula/ theme instead.
 #+begin_src emacs-lisp
