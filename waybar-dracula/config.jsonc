@@ -1,1 +1,205 @@
-// -*- mode: jsonc -*-
+//-*- mode: jsonc -*-
+
+{
+
+"layer": "top", // Waybar at top layer
+"position": "top", // Waybar position (top|bottom|left|right)
+"height": 30, // Waybar height (to be removed for auto height)
+// "width": 1280, // Waybar width
+"spacing": 4, // Gaps between modules (4px)
+
+"modules-left": [
+    "clock",
+    "custom/power",
+    "custom/rofi",
+    "tray",
+    "hyprland/workspaces",
+    "custom/media",
+    "hyprland/submap"
+   ],
+
+"modules-center": [
+    "hyprland/window"
+],
+
+"modules-right": [
+    "idle_inhibitor",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "temperature",
+    "memory",
+    "cpu",
+    "power-profiles-daemon",
+    "battery"
+],
+
+"clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    //"format-alt": "{:%Y-%m-%d}",
+    "on-click": "$HOME/scripts/time-notif.sh"
+},
+
+"custom/rofi": {
+    "format": "󱓟",
+    "on-click": "$HOME/scripts/rofi.sh",
+    "signal": 6,
+    "tooltip": true,
+    "tooltip-format": "Rofi: Application Launcher",
+    "return-type": "json"
+},
+
+"custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout",
+    "signal": 6,
+    "tooltip": true,
+    "tooltip-format": "Wlogout: Power menu",
+    "return-type": "json"
+},
+
+"tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+
+"hyprland/workspaces": {
+         "disable-scroll": false,
+         "all-outputs": true,
+         "warp-on-scroll": false,
+         "format": "{name}: {icon}",
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "󰙯",
+             "6": "",
+             "7": "",
+             "8": "󰈹",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+     },
+
+"custom/media": {
+        "format": "{0} {1}",
+        "return-type": "json",
+        "max-length": 20,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+	"on-click": "playerctl play-pause",	    
+        "exec": "$HOME/dotfiles/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+
+"hyprland/submap": {
+  "format": "Submap: {}"
+},
+
+"idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+"backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+    },
+
+"pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+"network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "family": "ipv4",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format-wifi": "Interface: {ifname} \nIp address: {ipaddr} \nVia: {gwaddr} ", 
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format-disconnected": "Disconnected ⚠",
+        //"format-alt": "{ifname}: {ipaddr}/{cidr}",
+	"on-click": "nmcli radio on & kitty -e nmtui",
+	"on-click-middle": "nmcli radio wifi off",
+	"on-click-right": "firewall-config"
+    },
+
+"temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""]
+},
+
+"memory": {
+        "format": "{}% ",
+        "on-click": "kitty -e btop"
+    },
+
+"cpu": {
+       "format": "{usage}% ",
+       "tooltip": false,
+       "on-click": "kitty -e btop"
+   },
+
+"power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+
+"battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        //"format-good": "", // An empty format will hide the module
+        "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    }
+
+}  
+//]
