@@ -39,7 +39,7 @@
 
 "custom/rofi": {
     "format": "󱓟",
-    "on-click": "$HOME/dotfiles/waybar/scripts/rofi.sh",
+    "on-click": "$HOME/scripts/bash/rofi.sh",
     "signal": 6,
     "tooltip": false,
     "return-type": "json"
@@ -78,8 +78,8 @@
         },
         "escape": true,
 	"on-click": "playerctl play-pause",	    
-        "exec": "$HOME/dotfiles/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "exec": "$HOME/scripts/python/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/scripts/python/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
 
 "hyprland/submap": {
