@@ -369,6 +369,12 @@ Additionally define the keybinding to be used with the custom markdown to PDF ex
     "w L" '(buf-move-up :wk "Buffer move right"))
 #+end_src
 
+*** Quiting
+#+begin_src emacs-lisp
+(hd/leader-keys
+    "q" '(:ignore t :wk "Quit/Exit options")
+    "q q" '(save-buffers-kill-emacs :wk "Save buffers and kill emacs"))
+#+end_src
 #+begin_src emacs-lisp
       )
 #+end_src
