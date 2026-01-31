@@ -10,7 +10,8 @@
   - [[#elpaca-package-manager][Elpaca Package Manager]]
   - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
-- [[#which-key][WHICH KEY]]
+  - [[#which-key][Which Key]]
+- [[#avy][AVY]]
 - [[#all-the-icons][ALL THE ICONS]]
   - [[#dired-support][Dired support]]
 - [[#auto-compete][AUTO-COMPETE]]
@@ -372,7 +373,7 @@ Additionally define the keybinding to be used with the custom markdown to PDF ex
       )
 #+end_src
     
-* WHICH KEY
+** Which Key
 Provides hints for "which" key combination does /what/ action.
 #+begin_src emacs-lisp
 (use-package which-key
@@ -393,6 +394,11 @@ Provides hints for "which" key combination does /what/ action.
              which-key-separator " → "))
 #+end_src
 
+* AVY
+#+begin_src emacs-lisp
+(use-package avy
+  :defer t)
+#+end_src
 * ALL THE ICONS
 This is an icon set that can be used with dashboard, dired, ibuffer and other Emacs programs.
 #+begin_src emacs-lisp 
