@@ -282,6 +282,7 @@ Elfeed-tube commands
     "f n" '((lambda () (interactive) (find-file "~/dotfiles/niri/niri.org")) :wk "Edit Niri config")
     "f q" '(qrencode-export-buffer-to-file :wk "Export qrcode buffers to a file")
     "f r" '(counsel-recentf :wk "Find recent files")
+    "f s" '((lambda () (interactive) (find-file "~/scripts/bash/setup.org")) :wk "Edit setup script")
     "f w" '((lambda () (interactive) (find-file "~/dotfiles/waybar/waybar.org")) :wk "Edit Waybar config"))
 #+end_src
 
@@ -822,7 +823,7 @@ Provides folding for code blocks based on indentation
 #+begin_src emacs-lisp
   (use-package yafolding
     :ensure t
-    :hook prog-mode shell-script-mode)
+    :hook org-mode prog-mode shell-script-mode)
 #+end_src
 * IVY (COUNSEL)
 - Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
