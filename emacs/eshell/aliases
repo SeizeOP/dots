@@ -4,5 +4,7 @@ alias dots cd ~/dotfiles/
 alias la ls -Ah $*
 alias ll ls -lAh $*
 alias ls ls -BAh $*
+alias lt ls -ltAh $*
 alias less view-file-other-window $@*
 alias edit find-file-other-window $@*
+alias scrntime scrntime -s 3

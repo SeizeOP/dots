@@ -16,7 +16,12 @@
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
  '(package-selected-packages nil)
  '(safe-local-variable-values
-   '((eval read-only-mode t) (eval org-display-inline-images) eval
+   '((eval setq-local org-roam-db-location
+	   (expand-file-name (concat org-roam-directory "org-roam.db")))
+     (eval setq-local org-roam-directory
+	   (expand-file-name
+	    (locate-dominating-file default-directory ".dir-locals.el")))
+     (eval read-only-mode t) (eval org-display-inline-images) eval
      face-remap-add-relative 'default
      '(:family "Times New Roman" :height 120)
      '(eval face-remap-add-relative 'default
