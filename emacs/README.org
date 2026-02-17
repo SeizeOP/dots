@@ -276,11 +276,11 @@ Elfeed-tube commands
 #+begin_src emacs-lisp
   (hd/leader-keys
     "." '(find-file :wk "Find file")
+    "f" '(:ignore t :wk "Find")
     "f c" '((lambda () (interactive) (find-file "~/dotfiles/emacs/README.org")) :wk "Edit Emacs config")
     "f f" '(query-replace-regexp :wk "Query Replace (regexp)")
     "f h" '((lambda () (interactive) (find-file "~/dotfiles/hypr/hyprland.org")) :wk "Edit Hyprland config")
     "f n" '((lambda () (interactive) (find-file "~/dotfiles/niri/niri.org")) :wk "Edit Niri config")
-    "f q" '(qrencode-export-buffer-to-file :wk "Export qrcode buffers to a file")
     "f r" '(counsel-recentf :wk "Find recent files")
     "f s" '((lambda () (interactive) (find-file "~/scripts/bash/setup.org")) :wk "Edit setup script")
     "f w" '((lambda () (interactive) (find-file "~/dotfiles/waybar/waybar.org")) :wk "Edit Waybar config"))
@@ -298,7 +298,7 @@ Elfeed-tube commands
 
 *** Menus
 **** Exporting
-**** Export Markdown to PDF
+***** Export Markdown to PDF
 Create a custom function to directly export Markdown files to PDFs.
 #+begin_src emacs-lisp
     (defun export-with-pandoc ()
@@ -314,19 +314,43 @@ Convert the current buffer's content from markdown to orgmode format, and save i
 
 **** Org Export Dispatch
 Create a key binding for a simple orgmode export menu, like what is used in /DOOM Emacs/. 
-
-Additionally define the keybinding to be used with the custom markdown to PDF export function.
 #+begin_src emacs-lisp
   (hd/leader-keys
     "m e" '(org-export-dispatch :wk "Export dispatcher for orgmode.")
-    "m p" '(export-with-pandoc :wk "Export Markdown directly to PDF"))
 #+end_src
+
+Additionally define the keybinding to be used with the custom markdown to PDF export function.
+#+begin_src emacs-lisp
+    "m p" '(export-with-pandoc :wk "Export Markdown directly to PDF")
+#+end_src
+
+Define keybinding to export QR code buffer to file.
+#+begin_src emacs-lisp
+    "m q" '(qrencode-export-buffer-to-file :wk "Export qrcode buffers to a file"))
+#+end_src
+
+*** Notes
+Keybindings for Org-roam and other note taking functions.
+#+begin_src emacs-lisp
+  (hd/leader-keys
+    "n" '(:ignore t :wk "Org-roam/Notes")
+    "n c" '(org-roam-node-create :wk "Create Note")
+    "n f" '(org-roam-node-find :wk "Find Note")
+    "n d" '(org-roam-dailies-capture-today :wk "Create Today's Note")
+    "n g" '(org-roam-ui-open :wk "Open Org-roam UI")
+    "n i" '(org-roam-node-insert :wk "Insert Note")
+    "n t" '(org-roam-dailies-capture-tomorrow :wk "Create Tomorrow's Note")
+    "n u" '(org-roam-ui-mode :wk "Toggle Org-roam UI Mode")
+    "n y" '(org-roam-dailies-capture-yesterday :wk "Create Yesterday's Note"))
+#+end_src
+
 *** Open
 #+begin_src emacs-lisp
   (hd/leader-keys
     "o" '(:ignore t :wk "Open")
     "o b" '(browse-url-of-buffer :wk "Open the current buffer in the XDG default browser")
     "o c" '(calendar :wk "Open Calendar")  
+    "o f" '(make-frame-command :wk "Open new window (Frame)")  
     "o l" '(browse-url-xdg-open :wk "Open a URL in the XDG default browser")
     "o s" '(org-side-tree :wk "Org Side-Tree")
     "o t" '(vterm-toggle :wk "Open Vterm")

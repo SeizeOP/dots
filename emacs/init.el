@@ -14,7 +14,9 @@
    '("\\`https://fniessen\\.github\\.io/org-html-themes/org/html-theme-readtheorg\\.setup\\'"
      "\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(elfeed-goodies elfeed-org markdown-preview-eww markdown-ts-mode
+		    web-server))
  '(safe-local-variable-values
    '((eval setq-local org-roam-db-location
 	   (expand-file-name (concat org-roam-directory "org-roam.db")))
