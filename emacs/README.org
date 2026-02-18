@@ -1020,9 +1020,22 @@ bind the 'TAB' key to 'org-cycle'. This allows us to use the 'TAB' key in org-mo
 
 *credit:* [[https://emacs.stackexchange.com/questions/28222/how-to-make-tab-work-in-org-mode-when-combined-with-evil-mode][Emacs StackExchange]]
 #+begin_src emacs-lisp
-(evil-define-key 'normal evil-org-mode-map "<tab>" #'org-cycle)
+  ;;  (evil-define-key 'normal evil-org-mode-map (kbd "TAB") #'org-cycle)
+  ;; ;
+  					; (setq evil-want-C-i-jump nil)
 #+end_src
 
+*** Evil-org
+Install =evil-org= package which should resolve some keybind conflicts between =org-mode= and =evil-mode=.
+#+begin_src emacs-lisp
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+#+end_src
 ** Org-appear 
 The =org-appear= package provides the ability to toggle the visibility of hidden orgmode /emphasis/ markers for easier editing.
 #+begin_src emacs-lisp

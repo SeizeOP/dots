@@ -14,9 +14,7 @@
    '("\\`https://fniessen\\.github\\.io/org-html-themes/org/html-theme-readtheorg\\.setup\\'"
      "\\`https://fniessen\\.github\\.io\\(?:/\\|\\'\\)"
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
- '(package-selected-packages
-   '(elfeed-goodies elfeed-org markdown-preview-eww markdown-ts-mode
-		    page-break-lines web-server))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((doom-dashboard :url
 		     "https://github.com/emacs-dashboard/doom-dashboard.git")))
