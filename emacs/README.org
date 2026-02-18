@@ -125,10 +125,8 @@ My personal emacs config has been inspired by many factors, and it would be to d
   (add-hook 'after-init-hook #'elpaca-process-queues)
   (elpaca `(,@elpaca-order))
 
-  ;; Install a package via the elpaca macro
+;; Install a package via the elpaca macro
 ;; See the "recipes" section of the manual for more details.
-
-;; (elpaca example-package)
 #+end_src
 
 *** Use-package Support
@@ -136,6 +134,7 @@ Install use-package support
 #+begin_src emacs-lisp
    (elpaca elpaca-use-package
 #+end_src
+
 Enable use-package =:ensure= support for Elpaca.
 #+begin_src emacs-lisp
   (elpaca-use-package-mode)
@@ -257,7 +256,6 @@ Note that =comment-dwim-line= will uncomment currently commented lines, acting a
     "d" '(:ignore t :wk "Dired")
     "d d" '(dired :wk "dired"))
 #+end_src
-
 
 *** Elfeed
 #+begin_src emacs-lisp
@@ -1031,7 +1029,7 @@ Install =evil-org= package which should resolve some keybind conflicts between =
 (use-package evil-org
   :ensure t
   :after org
-  :hook (org-mode . (lambda () evil-org-mode))
+  :hook (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
