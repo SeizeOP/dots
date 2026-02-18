@@ -18,8 +18,6 @@
 |---+--------------------------+--------------------------------------------------------|
 | =1= | [[elisp:(find-file (concat (getenv "HOME") "/dotfiles/emacs/README.org"))][README.org]]               | This is the main user configuration file for Emacs.    |
 | =2= | [[elisp:(find-file (concat (getenv "HOME") "/.config/emacs/init.el"))][init.el]]                  | Emacs initializtion file.                              |
-| =3= | [[elisp:(find-file (concat (getenv "HOME") "/.config/emacs/themes/seize-the-night-theme.el"))][seize-the-night-theme.el]] | Custom theme for Emacs.                                |
-| =4= | [[elisp:(find-file (concat (getenv "HOME") "/.config/emacs/elfeed.org"))][elfeed.org]]               | Orgmode configuration file for Emacs Elfeed RSS reader |
 |---+--------------------------+--------------------------------------------------------|
 
 * COMMON FILES
@@ -39,7 +37,6 @@
 | =1= | [[elisp:(find-file (concat (getenv "HOME") "/.config/waybar/waybar.org"))][waybar.org]] | This is the *main user configuration* file for Waybar |
 |---+------------+-----------------------------------------------------|
 
- 
 # Local Variables:
 # eval: (display-line-numbers-mode -1)
 # eval: (org-display-inline-images)

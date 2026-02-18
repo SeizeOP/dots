@@ -16,7 +16,10 @@
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
  '(package-selected-packages
    '(elfeed-goodies elfeed-org markdown-preview-eww markdown-ts-mode
-		    web-server))
+		    page-break-lines web-server))
+ '(package-vc-selected-packages
+   '((doom-dashboard :url
+		     "https://github.com/emacs-dashboard/doom-dashboard.git")))
  '(safe-local-variable-values
    '((eval setq-local org-roam-db-location
 	   (expand-file-name (concat org-roam-directory "org-roam.db")))

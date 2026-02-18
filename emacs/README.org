@@ -21,8 +21,12 @@
   - [[#buf-move-down][buf-move-down]]
   - [[#buf-move-left][buf-move-left]]
   - [[#buf-move-right][buf-move-right]]
-- [[#doom-modeline][DOOM MODELINE]]
-- [[#emms][Emms]]
+- [[#dashboard][DASHBOARD]]
+  - [[#install-spacemacs-dashboard][Install /Spacemacs/ dashboard]]
+  - [[#customize-spacemacs-dashboard][Customize /Spacemacs/ dashboard]]
+  - [[#icons][Icons]]
+- [[#modeline][MODELINE]]
+- [[#emms][EMMS]]
 - [[#elfeed][ELFEED]]
   - [[#elfeed-1][Elfeed]]
   - [[#elfeed-goodies][Elfeed-goodies]]
@@ -221,16 +225,27 @@ Set =SPC= as the global leader key, and make the global leader key available in 
 
 *** Character Insertion
 
-Note that =comment-line= will uncomment currently commented lines, acting as a toggle.
+Note that =comment-dwim-line= will uncomment currently commented lines, acting as a toggle.
 #+begin_src emacs-lisp
   (hd/leader-keys
     "c" '(:ignore t :wk "comment")
-    "c l" '(comment-line :wk "Comment lines")
+    "c l" '(comment-dwim-line :wk "Comment lines")
     "c r" '(comment-region :wk "Comment out selected region")
     "c d" '(uncomment-region :wk "Uncomment selected region")
     "c u" '(insert-char :wk "Select and insert Unicode characters"))
 #+end_src
 
+#+begin_src emacs-lisp
+(defun comment-dwim-line (&optional arg)
+  "Replacement for comment-dwim. Comments the entire line if no region is active."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \\t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+
+(global-set-key (kbd "M-;") 'comment-dwim-line)   
+#+end_src
 **** Global =insert-char= keybinding 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x x") 'insert-char)
@@ -586,8 +601,61 @@ move this one to top
       (set-window-buffer other-win buf-this-buf)
       (select-window other-win))))
 #+end_src
+* DASHBOARD
+** Install /Spacemacs/ dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :init
+    (progn 
+      (setq dashboard-items '((recents . 4)
+  			    (bookmarks . 5))))
+  			    
+    :config
+    (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+    (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+    (dashboard-setup-startup-hook))
+#+End_src
 
-* DOOM MODELINE
+Set dashboard as initial buffer in frames created via =emacsclient -c= as well.
+#+begin_src emacs-lisp
+(setq initial-buffer-choice 'dashboard-open)
+#+end_src
+
+** Customize /Spacemacs/ dashboard
+Set dashboard title
+#+begin_src emacs-lisp
+(setq dashboard-banner-logo-title "Welcome to HDmacs")
+#+end_src
+
+Center dashboard content
+#+begin_src emacs-lisp
+(setq dashboard-center-content t)
+(setq dashboard-vertically-center-content t)
+#+end_src
+
+Disable keyboard shortcut hints in dashboard
+#+begin_src emacs-lisp
+(setq dashboard-show-shortcuts nil)
+#+end_src
+
+** Icons
+Use =all-the-icons= in dashboard
+#+begin_src emacs-lisp
+(setq dashboard-icon-type 'all-the-icons)
+#+end_src
+
+Add icons to the widget headings and their items
+#+begin_src emacs-lisp
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+#+end_src
+
+Set custom header image for dashboard 
+#+begin_src emacs-lisp
+  (setq dashboard-startup-banner "~/dotfiles/images/emacs-start-page.png")
+#+end_src
+* MODELINE
 Enable Doom Modeline
 #+begin_src emacs-lisp
 (use-package doom-modeline
@@ -606,7 +674,8 @@ Display the time and battery percentage in the modeline
     (display-time-24hr-format t)
     (display-battery-mode 1))
 #+end_src
-* Emms
+
+* EMMS
 #+begin_src emacs-lisp
   (use-package emms
     :config 
