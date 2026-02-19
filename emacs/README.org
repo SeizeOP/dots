@@ -68,11 +68,14 @@
 * ABOUT THIS CONFIG
 This is my personal /GNU Emacs/ literate configuration. I will do my best to clarify what external dependencies are required for this emacs config. However, the external dependency list may not be complete, and I may have made other undocumented changes to my system. Therefore, I would *NOT* recommend blindly copying this config. Instead, i would suggest reading though this config, and copying/reimplimenting only those sections which are relevant to your own personal emacs config.
 
+Some sections of this configuration remain commented out, as they are not currently being used but for ease of reimplimentation will remain documented.
+
 ** External Dependencies
 *** Programs
 - CMake: Needed for compiling some things
 - libvterm and libtool: for Vterm support
 *** Fonts
+- DejaVu Sans
 - JetBrains Mono
 - Source Code Pro
 ** Inspiration
@@ -259,16 +262,16 @@ Note that =comment-dwim-line= will uncomment currently commented lines, acting a
 
 *** Elfeed
 #+begin_src emacs-lisp
-  (hd/leader-keys
-    "r" '(:ignore t :wk "Elfeed")
-    "r o" '(elfeed :wk "Elfeed")
-    "r u" '(elfeed-update :wk "Elfeed Update")
-    "r U" '(elfeed-update-feed :wk "Elfeed Update Feed")
+  ;; (hd/leader-keys
+  ;;   "r" '(:ignore t :wk "Elfeed")
+  ;;   "r o" '(elfeed :wk "Elfeed")
+  ;;   "r u" '(elfeed-update :wk "Elfeed Update")
+  ;;   "r U" '(elfeed-update-feed :wk "Elfeed Update Feed")
 #+end_src
 
 Elfeed-tube commands
 #+begin_src emacs-lisp
-    "r p" '(elfeed-tube-mpv :wk "Open feed in MPV"))
+  ;; "r p" '(elfeed-tube-mpv :wk "Open feed in MPV"))
 #+end_src
 
 *** Eshell
@@ -416,7 +419,7 @@ Keybindings for Org-roam and other note taking functions.
 #+begin_src emacs-lisp
       )
 #+end_src
-    
+
 ** Which Key
 Provides hints for "which" key combination does /what/ action.
 #+begin_src emacs-lisp
@@ -675,23 +678,23 @@ Display the time and battery percentage in the modeline
 
 * EMMS
 #+begin_src emacs-lisp
-  (use-package emms
-    :config 
-    (require 'emms-setup)
-    (require 'emms-mpris)
-    (emms-all)
-    (emms-mpris-enable)
-    :custom
-    (emms-browser-covers #'emms-browser-cache-thumbnail-async)
-    :bind
-    (("C-c w m b" . emms-browser)
-     ("C-c w m e" . emms)
-     ("C-c w m p" . emms-play-playlist)
-     ("<XF86AudioPrev>" . emms-previous)
-     ("<XF86AudioNext>" . emms-next)
-     ("<XF86AudioPlay>" . emms-pause)))
-  (setq emms-player-list '(emms-player-mpv))
-  (setq emms-source-file-default-directory "~/Music/")
+  ;; (use-package emms
+  ;;   :config 
+  ;;   (require 'emms-setup)
+  ;;   (require 'emms-mpris)
+  ;;   (emms-all)
+  ;;   (emms-mpris-enable)
+  ;;   :custom
+  ;;   (emms-browser-covers #'emms-browser-cache-thumbnail-async)
+  ;;   :bind
+  ;;   (("C-c w m b" . emms-browser)
+  ;;    ("C-c w m e" . emms)
+  ;;    ("C-c w m p" . emms-play-playlist)
+  ;;    ("<XF86AudioPrev>" . emms-previous)
+  ;;    ("<XF86AudioNext>" . emms-next)
+  ;;    ("<XF86AudioPlay>" . emms-pause)))
+  ;; (setq emms-player-list '(emms-player-mpv))
+  ;; (setq emms-source-file-default-directory "~/Music/")
 #+end_src
 
 * ELFEED
@@ -705,60 +708,60 @@ Display the time and battery percentage in the modeline
 
 ** Elfeed-goodies
 #+begin_src emacs-lisp
-(package-install 'elfeed-goodies)
-(require 'elfeed)
-(require 'elfeed-goodies)
+  ;; (package-install 'elfeed-goodies)
+  ;; (require 'elfeed)
+  ;; (require 'elfeed-goodies)
 
-(elfeed-goodies/setup)
+  ;; (elfeed-goodies/setup)
 #+end_src
 
 ** Elfeed-org
 Load elfeed-org
 #+begin_src emacs-lisp
-(package-install 'elfeed-org)
-(require 'elfeed-org)
+  ;; (package-install 'elfeed-org)
+  ;; (require 'elfeed-org)
 #+end_src
 
 Initialize elfeed-org
 This hooks up elfeed-org to read the configuration when elfeed
 is started with =M-x elfeed=
 #+begin_src emacs-lisp
-(elfeed-org)
+  ;; (elfeed-org)
 #+end_src
 
 Optionally specify a number of files containing elfeed
 configuration. If not set then the location below is used.
 Note: The customize interface is also supported.
 #+begin_src emacs-lisp
-(setq rmh-elfeed-org-files (list "~/.config/emacs/elfeed.org"))
+  ;; (setq rmh-elfeed-org-files (list "~/.config/emacs/elfeed.org"))
 #+end_src
 
 ** Elfeed-tube
 #+begin_src emacs-lisp
-  (use-package elfeed-tube
-    :ensure t ;; or :straight t
-    :after elfeed
-    :demand t
-    :config
-    ;; (setq elfeed-tube-auto-save-p nil) ; default value
-    ;; (setq elfeed-tube-auto-fetch-p t) ; default value
-    (elfeed-tube-setup)
+  ;; (use-package elfeed-tube
+  ;;   :ensure t ;; or :straight t
+  ;;   :after elfeed
+  ;;   :demand t
+  ;;   :config
+  ;;   ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;;   ;; (setq elfeed-tube-auto-fetch-p t) ; default value
+  ;;   (elfeed-tube-setup)
 
-    :bind (:map elfeed-show-mode-map
-                ("F" . elfeed-tube-fetch)
-                ([remap save-buffer] . elfeed-tube-save)
-                :map elfeed-search-mode-map
-                ("F" . elfeed-tube-fetch)
-                ([remap save-buffer] . elfeed-tube-save)))
+  ;;   :bind (:map elfeed-show-mode-map
+  ;;               ("F" . elfeed-tube-fetch)
+  ;;               ([remap save-buffer] . elfeed-tube-save)
+  ;;               :map elfeed-search-mode-map
+  ;;               ("F" . elfeed-tube-fetch)
+  ;;               ([remap save-buffer] . elfeed-tube-save)))
 #+end_src
 
 *** Elfeed-tube-MPV
 #+begin_src emacs-lisp
-(use-package elfeed-tube-mpv
-  :ensure t ;; or :straight t
-  :bind (:map elfeed-show-mode-map
-              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
-              ("C-c C-w" . elfeed-tube-mpv-where)))
+  ;; (use-package elfeed-tube-mpv
+  ;;   :ensure t ;; or :straight t
+  ;;   :bind (:map elfeed-show-mode-map
+  ;;               ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+  ;;               ("C-c C-w" . elfeed-tube-mpv-where)))
 #+end_src
 
 * FONTS
