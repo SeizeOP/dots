@@ -21,10 +21,6 @@
   - [[#buf-move-down][buf-move-down]]
   - [[#buf-move-left][buf-move-left]]
   - [[#buf-move-right][buf-move-right]]
-- [[#dashboard][DASHBOARD]]
-  - [[#install-spacemacs-dashboard][Install /Spacemacs/ dashboard]]
-  - [[#customize-spacemacs-dashboard][Customize /Spacemacs/ dashboard]]
-  - [[#icons][Icons]]
 - [[#modeline][MODELINE]]
 - [[#emms][EMMS]]
 - [[#elfeed][ELFEED]]
@@ -601,60 +597,6 @@ move this one to top
 #+begin_src emacs-lisp
       (set-window-buffer other-win buf-this-buf)
       (select-window other-win))))
-#+end_src
-* DASHBOARD
-** Install /Spacemacs/ dashboard
-#+begin_src emacs-lisp
-  (use-package dashboard
-    :ensure t
-    :init
-    (progn 
-      (setq dashboard-items '((recents . 4)
-  			    (bookmarks . 5))))
-  			    
-    :config
-    (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
-    (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
-    (dashboard-setup-startup-hook))
-#+End_src
-
-Set dashboard as initial buffer in frames created via =emacsclient -c= as well.
-#+begin_src emacs-lisp
-(setq initial-buffer-choice 'dashboard-open)
-#+end_src
-
-** Customize /Spacemacs/ dashboard
-Set dashboard title
-#+begin_src emacs-lisp
-(setq dashboard-banner-logo-title "Welcome to HDmacs")
-#+end_src
-
-Center dashboard content
-#+begin_src emacs-lisp
-(setq dashboard-center-content t)
-(setq dashboard-vertically-center-content t)
-#+end_src
-
-Disable keyboard shortcut hints in dashboard
-#+begin_src emacs-lisp
-(setq dashboard-show-shortcuts nil)
-#+end_src
-
-** Icons
-Use =all-the-icons= in dashboard
-#+begin_src emacs-lisp
-(setq dashboard-icon-type 'all-the-icons)
-#+end_src
-
-Add icons to the widget headings and their items
-#+begin_src emacs-lisp
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-#+end_src
-
-Set custom header image for dashboard 
-#+begin_src emacs-lisp
-  (setq dashboard-startup-banner "~/dotfiles/images/emacs-start-page.png")
 #+end_src
 * MODELINE
 Enable Doom Modeline
@@ -1315,23 +1257,62 @@ Make initial buffer read-only and disable line numbers
   (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
 #+end_src 
 
+*** /Spacemacs/ dashboard
+**** Install /Spacemacs/ dashboard
 #+begin_src emacs-lisp
-  ;; (use-package dashboard
-  ;; :elpaca t
-  ;; :config
-  ;; (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
-  ;; (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
-  ;; (dashboard-setup-startup-hook))
+  (use-package dashboard
+    :ensure t
+    :init
+    (progn 
+      (setq dashboard-items '((recents . 4)
+  			    (bookmarks . 5))))
+  			    
+    :config
+    (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+    (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+    (dashboard-setup-startup-hook))
+#+End_src
 
-  ;; (setq dashboard-startup-banner 'logo)
-  ;; (setq dashboard-center-content t)
-  ;; (setq dashboard-vertically-center-content t)
-  ;; (setq dashboard-items '((recents . 10)
-  ;; 			(bookmaks . 5)
-  ;; 			(projects . 5)
-  ;; 			(registers . )))
-#+end_src 
-* Footnotes :noexport:
+Set dashboard as initial buffer in frames created via =emacsclient -c= as well.
+#+begin_src emacs-lisp
+(setq initial-buffer-choice 'dashboard-open)
+#+end_src
+
+**** Customize /Spacemacs/ dashboard
+Set dashboard title
+#+begin_src emacs-lisp
+(setq dashboard-banner-logo-title "Welcome to HDmacs")
+#+end_src
+
+Center dashboard content
+#+begin_src emacs-lisp
+(setq dashboard-center-content t)
+(setq dashboard-vertically-center-content t)
+#+end_src
+
+Disable keyboard shortcut hints in dashboard
+#+begin_src emacs-lisp
+(setq dashboard-show-shortcuts nil)
+#+end_src
+
+**** Icons
+Use =all-the-icons= in dashboard
+#+begin_src emacs-lisp
+(setq dashboard-icon-type 'all-the-icons)
+#+end_src
+
+Add icons to the widget headings and their items
+#+begin_src emacs-lisp
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+#+end_src
+
+Set custom header image for dashboard 
+#+begin_src emacs-lisp
+  (setq dashboard-startup-banner "~/dotfiles/images/emacs-start-page.png")
+#+end_src
+
+* Footnotes                                                        :noexport:
 #+options: num:nil toc:2 
 #+startup: inlineimages fold
 #+exclude_tags: noexport
