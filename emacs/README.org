@@ -1,5 +1,6 @@
 #+author: Henry Davies
 #+title: HD's GNU Emacs Configuration
+
  [[file:./../images/emacs-org.png]] 
 
 * TABLE OF CONTENTS :toc:noexport:
@@ -38,6 +39,9 @@
   - [[#disable-symlink-to-git-directory-popup-dialog][Disable Symlink to Git directory popup dialog]]
   - [[#yafold][Yafold]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
+  - [[#counsel][Counsel]]
+  - [[#ivy][Ivy]]
+  - [[#ivy-rich][Ivy Rich]]
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#org-mode][ORG MODE]]
   - [[#auto-tangle][Auto Tangle]]
@@ -51,6 +55,9 @@
   - [[#org-roam][Org-roam]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
 - [[#pdf-view-mode][PDF VIEW MODE]]
+  - [[#install-pdf-view-mode][Install =pdf-view-mode=]]
+  - [[#configure-pdf-view-mode][Configure =pdf-view-mode=]]
+- [[#qr-encode][QR Encode]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#ctrl-c-fix][CTRL-C Fix]]
@@ -362,6 +369,7 @@ Keybindings for Org-roam and other note taking functions.
     "o" '(:ignore t :wk "Open")
     "o b" '(browse-url-of-buffer :wk "Open the current buffer in the XDG default browser")
     "o c" '(calendar :wk "Open Calendar")  
+    "o e" '(eshell :wk "Open Eshell")  
     "o f" '(make-frame-command :wk "Open new window (Frame)")  
     "o l" '(browse-url-xdg-open :wk "Open a URL in the XDG default browser")
     "o s" '(org-side-tree :wk "Org Side-Tree")
@@ -408,9 +416,10 @@ Keybindings for Org-roam and other note taking functions.
 
 *** Quiting
 #+begin_src emacs-lisp
-(hd/leader-keys
-    "q" '(:ignore t :wk "Quit/Exit options")
-    "q q" '(save-buffers-kill-emacs :wk "Save buffers and kill emacs"))
+  (hd/leader-keys
+      "q" '(:ignore t :wk "Quit/Exit options")
+      "q q" '(save-buffers-kill-emacs :wk "Save buffers and kill emacs")
+      "q r" '(restart-emacs :wk "Restart Emacs"))
 #+end_src
 #+begin_src emacs-lisp
       )
@@ -861,37 +870,34 @@ Provides folding for code blocks based on indentation
     :ensure t
     :hook org-mode prog-mode shell-script-mode)
 #+end_src
+
 * IVY (COUNSEL)
-- Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+** Counsel 
+a collection of Ivy-enhanced versions of common Emacs commands.
 #+begin_src emacs-lisp
-      (use-package counsel 
-        :after ivy
-        :config (counsel-mode))
+  (use-package counsel 
+    :after ivy
+    :config (counsel-mode))
 #+end_src
 
-- Ivy, a generic completion framework for Emacs.
+** Ivy 
+A generic completion framework for Emacs.
 #+begin_src emacs-lisp
-      (use-package ivy
-        :bind
-        ;; ivy-resume resumes the last ivy-based completion.
-        (("C-C C-r" . ivy-resume)
-         ("C-x B" . ivy-switch-buffer-other-window))
-        :custom
-        (setq ivy-use-virtual-buffers t)
-        (setq ivy-count-format "(%d/%d) ")
-        (setq enable-recursive-minibuffers t)
-        :config
-        (ivy-mode))
+  (use-package ivy
+    :bind
+    ;; ivy-resume resumes the last ivy-based completion.
+    (("C-C C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :custom
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
 #+end_src
 
-- =all-the-icons= support for =ivy-rich=
-#+begin_src emacs-lisp
-    (use-package all-the-icons-ivy-rich
-      :ensure t
-      :init (all-the-icons-ivy-rich-mode 1))
-#+end_src
-
-- Ivy-rich allows us to add descriptions alongside the commands in M-x.
+** Ivy Rich
+Ivy-rich allows us to add descriptions alongside the commands in M-x.
 #+begin_src emacs-lisp
   (use-package ivy-rich
     :after ivy
@@ -907,13 +913,20 @@ Provides folding for code blocks based on indentation
 
 #+end_src
 
+*** =all-the-icons= support for =ivy-rich=
+#+begin_src emacs-lisp
+    (use-package all-the-icons-ivy-rich
+      :ensure t
+      :init (all-the-icons-ivy-rich-mode 1))
+#+end_src
+
 * Multiple Cursors
 Initialize the =multiple-cursors= package, and define keybindings
 
 #+begin_src emacs-lisp
-(use-package multiple-cursors
-  :bind (("C->"   . mc/mark-next-like-this)
-         ("C-M->" . mc/mark-all-like-this-dwim)))
+  ;; (use-package multiple-cursors
+  ;;   :bind (("C->"   . mc/mark-next-like-this)
+  ;;          ("C-M->" . mc/mark-all-like-this-dwim)))
 #+end_src
 
 * ORG MODE
@@ -1094,12 +1107,67 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 #+end_src
 
 * PDF VIEW MODE
+** Install =pdf-view-mode=
+#+begin_src emacs-lisp
+  ;; (use-package pdf-tools
+  ;;   :ensure t
+  ;;   :config
+  ;;   (pdf-tools-install))
+#+end_src
+
+** Configure =pdf-view-mode=
+*** Enable =pdf-view-mode= for all PDFs
+#+begin_src emacs-lisp
+(add-hook 'pdf-view-mode-hook #'pdf-view-roll-minor-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
+#+end_src
+
+*** Fix OCR Highlighting in =pdf-view-mode=
+#+begin_quote
+In [OCRed] PDFs the selected text becomes hidden behind the selection; see this issue, which also describes the workaround in detail. The following function, which depends on the qpdf.el package, can be used to convert such a PDF file into one where text selection is transparent:
+#+end_quote
+- credit: https://github.com/vedang/pdf-tools
+ 
+#+begin_src emacs-lisp
+(defun my-fix-pdf-selection ()
+  "Replace pdf with one where selection shows transparently."
+  (interactive)
+  (unless (equal (file-name-extension (buffer-file-name)) "pdf")
+    (error "Buffer should visit a pdf file."))
+  (unless (equal major-mode 'pdf-view-mode)
+    (pdf-view-mode))
+  ;; save file in QDF-mode
+  (qpdf-run (list
+             (concat "--infile="
+                     (buffer-file-name))
+             "--qdf --object-streams=disable"
+             "--replace-input"))
+  ;; do replacements
+  (text-mode)
+  (read-only-mode -1)
+  (while (re-search-forward "3 Tr" nil t)
+    (replace-match "7 Tr" nil nil))
+  (save-buffer)
+  (pdf-view-mode))
+#+end_src
+
+*** Define Key Combinations for =pdf-view-mode=
 #+begin_src emacs-lisp
 (general-define-key
  :keymaps 'pdf-view-mode-map
  "C-H" 'pdf-annot-add-highlight-markup-annotation
  "C-D" 'pdf-annot-delete)
 #+end_src
+
+* QR Encode
+#+begin_src emacs-lisp
+(use-package qrencode
+  :ensure t)
+#+end_src
+
 * RAINBOW MODE
 Display the actual color as a background for any hex color value (ex. #ffffff). The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.
 
@@ -1112,14 +1180,14 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 ** CTRL-C Fix
 Fix to allow the =CTRL C= key combination to be used to terminate a process in shell modes. 
 
-Vterm
+*** Vterm
 #+begin_src emacs-lisp
 (general-define-key :keymaps 'vterm-mode-map :states '(insert) "C-c" 'vterm-send-C-c)
 #+end_src
 
-Eshell
+*** Eshell
 #+begin_src emacs-lisp
-  (general-define-key :keymaps 'eshell-mode-map :states '(insert) "C-c" 'eshell-kill-process)
+(general-define-key :keymaps 'eshell-mode-map :states '(insert) "C-c" 'eshell-kill-process)
 #+end_src
 
 ** Eshell
@@ -1205,20 +1273,21 @@ vterm-toggle toggles between the vterm buffer and whatever buffer you are editin
 #+end_src
 
 * THEME
-The first of the two lines below designates the directory where we will place all of our themes. The second line loads our chosen theme which is *Seize the night*, a theme that i created with the help of the [[https://mswift42.github.io/themecreator/][Emacs Theme Editor]].
+The first of the two lines below designates the directory where we will place all of our themes. The second line loads our chosen theme which is *Seize the night*, a theme that was created with the help of the [[https://mswift42.github.io/themecreator/][Emacs Theme Editor]].
 
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
 #+end_src 
 
-=seize-the-night= is my custom theme for Emacs. Currently [2024-12-08 Sun] it is still a work in progress because i need to add some polish, and fix up the colors to better match the /Dracula/ theme. 
+=seize-the-night= is my custom theme for Emacs. Currently [2024-12-08] it is still a work in progress as some added polish is needed. 
 #+begin_src emacs-lisp
 ;; (load-theme 'seize-the-night t)
 #+end_src 
 
-*Update:* As of 2025-06-03 I have fully switched away from using my custom =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
+*Update:* As of [2025-06-03] I have fully switched away from using my custom =seize-the-night= theme, and I have moved back to using /Doom Dracula/ as my default theme. Some time in the future I may revisit this custom theme. For now though I will just leave this here for historical purposes.
+
 ** Doom Themes
-Until then i will use the /Doom Dracula/ theme instead.
+/Doom/ themes and /Doom Dracula/ theme setup.
 #+begin_src emacs-lisp
 (use-package doom-themes
   :ensure t
@@ -1240,6 +1309,7 @@ Until then i will use the /Doom Dracula/ theme instead.
 #+end_src 
 
 ** Initial Buffer Choice & Options 
+*** Disable Initial Buffer
 Disable the built-in /Emacs/ splash screen and set custom initial buffer
 #+begin_src emacs-lisp
     (setq inhibit-startup-screen 1)
@@ -1256,6 +1326,8 @@ Make initial buffer read-only and disable line numbers
         (setq display-line-numbers-mode -1))))
   (add-hook 'emacs-startup-hook 'startup-buffer-configuration)
 #+end_src 
+
+*NOTE:* Custom =initial-buffer-choice= will be overriden by preconfigured custom dashboards such as /Spacemacs dashboard/ and /Doom dashboard/.
 
 *** /Spacemacs/ dashboard
 **** Install /Spacemacs/ dashboard
@@ -1312,7 +1384,7 @@ Set custom header image for dashboard
   (setq dashboard-startup-banner "~/dotfiles/images/emacs-start-page.png")
 #+end_src
 
-* Footnotes                                                        :noexport:
+* FOOTNOTES                                                        :noexport:
 #+options: num:nil toc:2 
 #+startup: inlineimages fold
 #+exclude_tags: noexport
