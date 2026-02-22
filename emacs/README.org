@@ -30,7 +30,8 @@
   - [[#elfeed-org][Elfeed-org]]
   - [[#elfeed-tube][Elfeed-tube]]
 - [[#fonts][FONTS]]
-  - [[#setting-the-font-face][Setting the font face]]
+  - [[#setting-the-font-faces][Setting the font faces]]
+  - [[#set-the-line-spacing][Set the line spacing]]
   - [[#zooming-inout][Zooming In/Out]]
 - [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
   - [[#better-list-bullets][Better List Bullets]]
@@ -57,7 +58,7 @@
 - [[#pdf-view-mode][PDF VIEW MODE]]
   - [[#install-pdf-view-mode][Install =pdf-view-mode=]]
   - [[#configure-pdf-view-mode][Configure =pdf-view-mode=]]
-- [[#qr-encode][QR Encode]]
+- [[#qr-encode][QR ENCODE]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#ctrl-c-fix][CTRL-C Fix]]
@@ -229,20 +230,11 @@ Set =SPC= as the global leader key, and make the global leader key available in 
 #+end_src
 
 *** Character Insertion
+**** Comment manipulation
 
-Note that =comment-dwim-line= will uncomment currently commented lines, acting as a toggle.
-#+begin_src emacs-lisp
-  (hd/leader-keys
-    "c" '(:ignore t :wk "comment")
-    "c l" '(comment-dwim-line :wk "Comment lines")
-    "c r" '(comment-region :wk "Comment out selected region")
-    "c d" '(uncomment-region :wk "Uncomment selected region")
-    "c u" '(insert-char :wk "Select and insert Unicode characters"))
-#+end_src
-
+Replacement for =comment-dwim=. Comments the entire line if no region is active.
 #+begin_src emacs-lisp
 (defun comment-dwim-line (&optional arg)
-  "Replacement for comment-dwim. Comments the entire line if no region is active."
   (interactive "*P")
   (comment-normalize-vars)
   (if (and (not (region-active-p)) (not (looking-at "[ \\t]*$")))
@@ -251,6 +243,31 @@ Note that =comment-dwim-line= will uncomment currently commented lines, acting a
 
 (global-set-key (kbd "M-;") 'comment-dwim-line)   
 #+end_src
+
+Make =comment-region= blocks extend to the end of a line.
+#+begin_src emacs-lisp
+  (defun my-auto-comment-region ()
+    "Comment the current region, extending to the end of each line."
+    (interactive)
+    (let* ((start (region-beginning))
+           (end   (region-end))
+           (end-line (save-excursion
+                       (goto-char end)
+                       (line-end-position))))
+      (comment-region start end-line)))
+#+end_src
+
+Note that =comment-dwim-line= will uncomment currently commented lines, acting as a toggle.
+#+begin_src emacs-lisp
+  (hd/leader-keys
+    "c" '(:ignore t :wk "comment")
+    "c l" '(comment-dwim-line :wk "comment lines")
+    "c r" '(my-auto-comment-region :wk "comment out selected region")
+    "c d" '(uncomment-region :wk "uncomment selected region")
+    "c u" '(insert-char :wk "Select and insert Unicode characters"))
+#+end_src
+
+
 **** Global =insert-char= keybinding 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x x") 'insert-char)
@@ -718,26 +735,19 @@ Note: The customize interface is also supported.
 * FONTS
 Defining the various fonts that emacs will use
 
-** Setting the font face
+** Setting the font faces
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil
-                      :font "JetBrains Mono"
-                      :height 110
-                      :weight 'medium)
-  (set-face-attribute 'variable-pitch nil
-                      :font "DejaVu Sans"
-                      :height 120
-                      :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil
-                      :font "JetBrains Mono"
-                      :height 110
-                      :weight 'medium)
-  (set-face-attribute 'font-lock-comment-face nil
-                      :slant 'italic)
-  (set-face-attribute 'font-lock-keyword-face nil
-                      :slant 'italic)
-  (add-to-list 'default-frame-alist 
-               '(font . "JetBrains Mono-11"))
+  (set-face-attribute 'default nil :font "JetBrains Mono" :height 110 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "DejaVu Sans" :height 120 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 110 :weight 'medium)
+  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
+  (add-to-list 'default-frame-alist  
+  	     '(font . "JetBrains Mono-11"))
+#+end_src
+
+** Set the line spacing
+#+begin_src emacs-lisp
   (setq-default line-spacing 0.12)
 #+end_src
 
@@ -754,7 +764,8 @@ Default Orgmode to ~Open Dyslexic~ fonts
   			   (buffer-face-mode)))
 #+end_src
 
-Orgmode font overrides
+**** Orgmode font overrides
+Override *Orgmode* font faces for select org elements
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook (lambda ()
   			   (custom-set-faces
@@ -976,9 +987,8 @@ bind the 'TAB' key to 'org-cycle'. This allows us to use the 'TAB' key in org-mo
 
 *credit:* [[https://emacs.stackexchange.com/questions/28222/how-to-make-tab-work-in-org-mode-when-combined-with-evil-mode][Emacs StackExchange]]
 #+begin_src emacs-lisp
-  ;;  (evil-define-key 'normal evil-org-mode-map (kbd "TAB") #'org-cycle)
-  ;; ;
-  					; (setq evil-want-C-i-jump nil)
+  ;; (evil-define-key 'normal evil-org-mode-map (kbd "TAB") #'org-cycle)
+  ;; (setq evil-want-C-i-jump nil)
 #+end_src
 
 *** Evil-org
@@ -992,6 +1002,7 @@ Install =evil-org= package which should resolve some keybind conflicts between =
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 #+end_src
+
 ** Org-appear 
 The =org-appear= package provides the ability to toggle the visibility of hidden orgmode /emphasis/ markers for easier editing.
 #+begin_src emacs-lisp
@@ -1162,7 +1173,7 @@ In [OCRed] PDFs the selected text becomes hidden behind the selection; see this 
  "C-D" 'pdf-annot-delete)
 #+end_src
 
-* QR Encode
+* QR ENCODE
 #+begin_src emacs-lisp
 (use-package qrencode
   :ensure t)
