@@ -43,6 +43,9 @@
   - [[#counsel][Counsel]]
   - [[#ivy][Ivy]]
   - [[#ivy-rich][Ivy Rich]]
+- [[#markdown-mode][Markdown Mode]]
+  - [[#install-markdown-mode][Install =markdown-mode=]]
+  - [[#customize-markdown-mode][Customize =markdown-mode=]]
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#org-mode][ORG MODE]]
   - [[#auto-tangle][Auto Tangle]]
@@ -930,6 +933,32 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
       :ensure t
       :init (all-the-icons-ivy-rich-mode 1))
 #+end_src
+
+* Markdown Mode
+** Install =markdown-mode=
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+         ("C-c C-e" . markdown-do)))
+#+end_src
+
+** Customize =markdown-mode=
+Always open the preview window at the right
+#+begin_src emacs-lisp
+(setq markdown-split-window-direction 'right)
+;; always open the preview window at the bottom
+;;(setq markdown-split-window-direction 'below)
+#+end_src
+
+Delete exported HTML file after markdown-live-preview-export is called
+#+begin_src emacs-lisp
+(setq markdown-live-preview-delete-export 'delete-on-export)
+#+end_src
+
+Credit: https://jblevins.org/projects/markdown-mode/
 
 * Multiple Cursors
 Initialize the =multiple-cursors= package, and define keybindings
