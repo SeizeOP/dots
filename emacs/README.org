@@ -49,6 +49,7 @@
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#org-mode][ORG MODE]]
   - [[#auto-tangle][Auto Tangle]]
+  - [[#custom-link-support][Custom Link Support]]
   - [[#disable-electric-indent][Disable Electric Indent]]
   - [[#enable-image-scaling-in-orgmode][Enable image scaling in orgmode]]
   - [[#enable-table-of-contents][Enable Table of Contents]]
@@ -982,6 +983,18 @@ Install =org-auto-tangle=
 #+end_src
 to enable =org-auto-tangle= in a buffer use the =#+auto_tangle: t= option flag. 
 
+** Custom Link Support
+#+begin_src emacs-lisp
+(with-eval-after-load 'ol
+  (org-link-set-parameters "tel"
+    :export (lambda (path desc backend)
+              (cond
+               ((eq backend 'html)
+                (format "<a href=\"tel:%s\">%s</a>" path (or desc path)))
+               ((eq backend 'odt)
+                (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" 
+                        path (or desc path)))))))
+#+end_src
 ** Disable Electric Indent
 Org mode source blocks have some really weird and annoying default indentation behavior. I think this has to do with electric-indent-mode, which is turned on by default in Emacs. So let's turn it OFF!
 
