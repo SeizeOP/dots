@@ -23,6 +23,8 @@
   - [[#buf-move-left][buf-move-left]]
   - [[#buf-move-right][buf-move-right]]
 - [[#modeline][MODELINE]]
+  - [[#enable-doom-modeline][Enable Doom Modeline]]
+  - [[#configure-modeline][Configure Modeline]]
 - [[#emms][EMMS]]
 - [[#elfeed][ELFEED]]
   - [[#elfeed-1][Elfeed]]
@@ -50,6 +52,7 @@
 - [[#org-mode][ORG MODE]]
   - [[#auto-tangle][Auto Tangle]]
   - [[#custom-link-support][Custom Link Support]]
+  - [[#timestamp-export-customization][Timestamp Export Customization]]
   - [[#disable-electric-indent][Disable Electric Indent]]
   - [[#enable-image-scaling-in-orgmode][Enable image scaling in orgmode]]
   - [[#enable-table-of-contents][Enable Table of Contents]]
@@ -629,11 +632,26 @@ move this one to top
       (select-window other-win))))
 #+end_src
 * MODELINE
-Enable Doom Modeline
+** Enable Doom Modeline
 #+begin_src emacs-lisp
-(use-package doom-modeline
-:ensure t
-:init (doom-modeline-mode 1))
+  (use-package helm-ag
+    :ensure t)
+
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1))
+#+end_src
+
+** Configure Modeline
+#+begin_src emacs-lisp
+  (setq doom-modeline-height 40)
+  (setq doom-modeline-bar-width 4)
+  (setq doom-modeline-icon t)
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
 #+end_src
 
 Display the time and battery percentage in the modeline
@@ -925,14 +943,13 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
     :config
     (ivy-set-display-transformer 'ivy-switch-buffer
      'ivy-rich-switch-buffer-transformer)) 
-
 #+end_src
 
 *** =all-the-icons= support for =ivy-rich=
 #+begin_src emacs-lisp
-    (use-package all-the-icons-ivy-rich
-      :ensure t
-      :init (all-the-icons-ivy-rich-mode 1))
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
 #+end_src
 
 * Markdown Mode
@@ -994,6 +1011,26 @@ to enable =org-auto-tangle= in a buffer use the =#+auto_tangle: t= option flag.
                ((eq backend 'odt)
                 (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" 
                         path (or desc path)))))))
+#+end_src
+
+** Timestamp Export Customization
+Source: https://endlessparentheses.com/better-time-stamps-in-org-export.html
+#+begin_src emacs-lisp
+  ;;  (add-to-list 'org-export-filter-timestamp-functions
+  ;;               #'endless/filter-timestamp)
+  ;;  (defun endless/filter-timestamp (trans back _comm)
+  ;; ;;   "Remove <> around time-stamps."
+  ;;    (pcase back
+  ;;      ((or `jekyll `html)
+  ;;       (replace-regexp-in-string "&[lg]t;" "" trans))
+  ;;      (`latex
+  ;;       (replace-regexp-in-string "[<>]" "" trans))))
+#+end_src
+
+#+begin_src emacs-lisp
+(setq-default org-display-custom-times t)
+;; Before you ask: No, removing the <> here doesn't work.
+(setq org-time-stamp-custom-formats '("<%b %d %Y>" . "<%m/%d/%Y %a %H:%M>"))
 #+end_src
 ** Disable Electric Indent
 Org mode source blocks have some really weird and annoying default indentation behavior. I think this has to do with electric-indent-mode, which is turned on by default in Emacs. So let's turn it OFF!
