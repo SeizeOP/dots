@@ -449,6 +449,11 @@ Keybindings for Org-roam and other note taking functions.
       )
 #+end_src
 
+*** Select CUA keybindings
+#+begin_src emacs-lisp
+ (global-set-key (kbd "C-s") 'save-buffer)
+#+end_src
+
 ** Which Key
 Provides hints for "which" key combination does /what/ action.
 #+begin_src emacs-lisp
@@ -829,6 +834,10 @@ credit: https://zzamboni.org/post/beautifying-org-mode-in-emacs/
   ;;(scroll-bar-mode -1)
 #+end_src
 
+**** Enable Tab bar mode 
+#+begin_src emacs-lisp
+(tab-bar-mode 1)
+#+end_src
 *** Org-side-tree
 Org-side-tree provides a simple graphical tree style view for navigation of org-mode headers. Below are the configurations used to more completely integrate =org-side-tree= with the rest of this custom emacs configuration.
 
