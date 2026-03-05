@@ -207,20 +207,20 @@ Expands to: (elpaca evil (use-package evil :demand t))
 *** SETUP
 Enable the =general= package; required for "General Keybindings"
 #+begin_src emacs-lisp
-    (use-package general
-      :config
-      (general-evil-setup)
+  (use-package general
+    :config
+    (general-evil-setup t)
 #+end_src
 
 *** GLOBAL LEADER KEY
 Set =SPC= as the global leader key, and make the global leader key available in insert mode
 #+begin_src emacs-lisp
-      ;; setup 'SPC' as the global leader key
-      (general-create-definer hd/leader-keys
-        :states '(normal visual emacs)
-        :keymaps 'override
-        :prefix "SPC" ;; set leader
-        :global-prefix "C-SPC") ;; access leader in insert mode
+  ;; setup 'SPC' as the global leader key
+  (general-create-definer hd/leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC" ;; set leader
+    :global-prefix "C-SPC") ;; access leader in insert mode
 #+end_src
 *** Buffers
 #+begin_src emacs-lisp
