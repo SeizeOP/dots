@@ -401,6 +401,15 @@ Keybindings for Org-roam and other note taking functions.
     "o q" '(qrencode-url-at-point :wk "Generate a qrcode from UR under cursor"))
 #+end_src
 
+*** Saving
+#+begin_src emacs-lisp
+  (hd/leader-keys
+    "s" '(:ignore t :wk "Saving")
+    "s b" '(save-buffer :wk "Save current buffer")
+    "s B" '(save-some-buffers :wk "Prompt & Save all open buffers")
+    "s a" '(auto-save-mode :wk "Save session"))
+#+end_src
+
 *** Toggles 
 #+begin_src emacs-lisp
   (hd/leader-keys
