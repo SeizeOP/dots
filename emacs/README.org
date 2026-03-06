@@ -25,6 +25,7 @@
 - [[#modeline][MODELINE]]
   - [[#enable-doom-modeline][Enable Doom Modeline]]
   - [[#configure-modeline][Configure Modeline]]
+  - [[#nyan-mode][Nyan Mode]]
 - [[#emms][EMMS]]
 - [[#elfeed][ELFEED]]
   - [[#elfeed-1][Elfeed]]
@@ -668,6 +669,7 @@ move this one to top
   (setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
 #+end_src
 
+*** Time and Battery Display
 Display the time and battery percentage in the modeline
 #+begin_src emacs-lisp
   (use-package time
@@ -677,7 +679,24 @@ Display the time and battery percentage in the modeline
     :custom
     (display-time-default-load-average nil)
     (display-time-24hr-format t)
-    (display-battery-mode 1))
+#+end_src
+
+Disable the battery display if on Desktop, as it will cause a persistent error otherwise.
+#+begin_quote
+Error (use-package): doom-modeline/:init: Args out of range: "", 0, -1
+#+end_quote
+#+begin_src emacs-lisp
+  ;; (display-battery-mode 1)
+#+end_src
+
+#+begin_src emacs-lisp
+  )
+#+end_src
+** Nyan Mode
+#+begin_src emacs-lisp
+(use-package nyan-mode
+  :init
+  (nyan-mode))
 #+end_src
 
 * EMMS
