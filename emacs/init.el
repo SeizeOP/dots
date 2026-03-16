@@ -16,7 +16,7 @@
      "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-readtheorg\\.setup\\'"))
  '(package-selected-packages
    '(markdown-preview-eww markdown-preview-mode markdown-ts-mode
-			  page-break-lines web-server))
+			  page-break-lines powershell web-server))
  '(package-vc-selected-packages
    '((doom-dashboard :url
 		     "https://github.com/emacs-dashboard/doom-dashboard.git")))

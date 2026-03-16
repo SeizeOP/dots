@@ -10,4 +10,4 @@ For example:
 One notable exception to this naming convention is, I have named my Emacs config ~README.org~ instead of ~Emacs.org~. The reason I have named the Emacs this way is because GitHub only automatically expands orgmode or markdown files if they are named README, and given the complexity of my Emacs config I wanted the orgmode document to auto expand for better readability.
 
 * Setup Script
-For those who want a more automated setup process for dotfiles in this repository, checkout my [[https://github.com/SeizeOP/scripts/blob/main/bash/setup.sh][setup script]].
+For those who want a more automated setup process for dotfiles in this repository, checkout my [[https://github.com/SeizeOP/scripts/blob/main/bash/setup.sh][Setup Script]].
