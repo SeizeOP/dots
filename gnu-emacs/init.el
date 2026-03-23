@@ -31,6 +31,9 @@
 (if (display-graphic-p)
     (scroll-bar-mode 1)
   (scroll-bar-mode -1))
+(if (display-graphic-p)
+    (tab-bar-mode 1)
+  (tab-bar-mode -1))
   
 (use-package treemacs
   :ensure t)  
@@ -147,6 +150,7 @@
 (dolist (mode '(term-mode-hook
 		treemacs-mode-hook
 		vterm-mode-hook
+		eat-mode-hook
                 eshell-mode-hook
 		org-side-tree-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -201,13 +205,7 @@
   (hd/leader-keys
     "d" '(:ignore t :wk "Dired")
     "d d" '(dired :wk "dired"))
-  (hd/leader-keys
-    "h" '(:ignore t :wk "Help")
-    "h f" '(describe-function :wk "Describe function")
-    "h v" '(describe-variable :wk "Describe-variable")
-    ;; "h r r" '(reload-init-file :wk "Reload emacs config"))
-    "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "Reload emacs config"))
-  (hd/leader-keys
+    (hd/leader-keys
     "e" '(:ignore t :wk "Eshell/Evaluate")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
@@ -222,10 +220,18 @@
     "f c" '((lambda () (interactive) (find-file "~/dotfiles/emacs/README.org")) :wk "Edit Emacs config")
     "f f" '(query-replace-regexp :wk "Query Replace (regexp)")
     "f h" '((lambda () (interactive) (find-file "~/dotfiles/hypr/hyprland.org")) :wk "Edit Hyprland config")
+    "f u" '(sudo-edit-find-file :wk "Sudo find file")
+    "f U" '(sudo-edit :wk "Sudo edit file")
     "f n" '((lambda () (interactive) (find-file "~/dotfiles/niri/niri.org")) :wk "Edit Niri config")
     "f r" '(counsel-recentf :wk "Find recent files")
     "f s" '((lambda () (interactive) (find-file "~/scripts/bash/setup.org")) :wk "Edit setup script")
     "f w" '((lambda () (interactive) (find-file "~/dotfiles/waybar/waybar.org")) :wk "Edit Waybar config"))
+(hd/leader-keys
+    "h" '(:ignore t :wk "Help")
+    "h f" '(describe-function :wk "Describe function")
+    "h v" '(describe-variable :wk "Describe-variable")
+    ;; "h r r" '(reload-init-file :wk "Reload emacs config"))
+    "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "Reload emacs config"))
   (hd/leader-keys
     "m e" '(org-export-dispatch :wk "Export dispatcher for orgmode.")
     "m p" '(export-with-pandoc :wk "Export Markdown directly to PDF")
@@ -248,7 +254,8 @@
     "o f" '(make-frame-command :wk "Open new window (Frame)")  
     "o l" '(browse-url-xdg-open :wk "Open a URL in the XDG default browser")
     "o s" '(org-side-tree :wk "Org Side-Tree")
-    "o t" '(vterm-toggle :wk "Open Vterm")
+    ;; "o t" '(vterm-toggle :wk "Open Vterm")
+    "o t" '(eat :wk "Open Eat")
     "o q" '(qrencode-url-at-point :wk "Generate a qrcode from UR under cursor"))
   (hd/leader-keys
     "q" '(:ignore t :wk "Quit/Exit options")
@@ -301,6 +308,10 @@
   :config
   (setq evil-collection-mode-list '(dashboard dired ibuffer))
   (evil-collection-init))
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
 
 (use-package ivy
   :bind
