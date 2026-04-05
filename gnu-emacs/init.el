@@ -162,6 +162,7 @@
                 shell-mode-hook
 		org-side-tree-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 ; set theme
 ;(load-theme 'modus-vivendi t)
 
@@ -183,7 +184,7 @@
   :init (which-key-mode)
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 0.3))
+  (setq which-key-idle-delay 0))
 
 (use-package general
   :config
@@ -373,6 +374,12 @@
 (require 'evil)
 (evil-define-key 'normal global-map (kbd "C-f") 'evil-search-forward)   
 (evil-define-key 'normal global-map (kbd "C-y") 'evil-redo)   
+
+;; Disable Evil mode for select modes
+(evil-set-initial-state 'eat-mode 'emacs)
+(evil-set-initial-state 'eshell-mode 'emacs)
+(evil-set-initial-state 'treemacs-mode 'emacs)
+
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -459,7 +466,6 @@
  				       (format "<a href=\"tel:%s\">%s</a>" path (or desc path)))
  				      ((eq backend 'odt)
  				       (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" path (or desc path)))))))
-
 (use-package yafolding
     :ensure t
     :hook org-mode prog-mode shell-script-mode)
