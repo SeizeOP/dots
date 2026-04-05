@@ -1,4 +1,5 @@
 ; package management setup
+; package management setup
 ;; Initialize package sources
 (require 'package)
 
@@ -139,8 +140,14 @@
      	    (when buffer-file-name 
      	      (shell-command (concat "pandoc -f markdown -t pdf -o ~/Documents/output.pdf " (shell-quote-argument buffer-file-name)))))
 
+(defun toggle-dialog-box ()
+  "Toggle the use of GUI dialog boxes in Emacs."
+  (interactive)
+  (setq use-dialog-box (not use-dialog-box))
+  (message "GUI dialogs are now %s" 
+           (if use-dialog-box "enabled" "disabled")))
 ; list recently editted files
-(recentf-mode 1)
+(setq recentf-mode 1)
 ; enable line numbers
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -152,6 +159,7 @@
 		vterm-mode-hook
 		eat-mode-hook
                 eshell-mode-hook
+                shell-mode-hook
 		org-side-tree-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 ; set theme
@@ -269,12 +277,13 @@
  (hd/leader-keys
     "t" '(:ignore t :wk "Toggle")
     "t c" '(org-toggle-checkbox :wk "Toggle Orgmode checkboxes")
+    "t d" '(toggle-dialog-box :wk "Toggle GUI dialogs")
     "t i" '(org-toggle-inline-images :wk "Toggle Orgmode inline images")
     "t l" '(org-toggle-link-display :wk "Toggle Orgmode link display")
     "t L" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t r" '(read-only-mode :wk "Toggle Read Only mode")
     "t t" '(visual-line-mode :wk "Toggle visual line mode")
-    "t v" '(vterm-toggle :wk "Toggle vterm")
+    ;; "t v" '(vterm-toggle :wk "Toggle vterm")
     "t m" '(treemacs :wk "Toggle treemacs")
     "t s" '(org-side-tree-toggle :wk "Toggle Org Side tree"))
   (hd/leader-keys
@@ -348,6 +357,11 @@
 (use-package org-appear) 
 (add-hook 'org-mode-hook 'org-appear-mode)
 
+(setq org-image-actual-width nil)
+
+;; like org apear for subscripts (using '_') and superscripts (using '^')
+(setq org-pretty-entities 1)
+
 ;; better list bullets
 (font-lock-add-keywords 'org-mode
                         '(("^ *\\([-]\\) "
@@ -416,6 +430,7 @@
            ("C-c n g" . org-roam-ui-open))
     :config
     (org-roam-setup))
+
 (use-package org-roam-ui
   :ensure t
   :after org-roam
@@ -424,9 +439,11 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
+
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
@@ -434,15 +451,14 @@
 (use-package org-side-tree
   :ensure t)
 
-(setq org-image-actual-width nil)
-;; (with-eval-after-load 'ol
-;;   (org-link-set-parameters "tel"
-;; 			   :export (lambda (path desc backend)
-;; 				     (cond
-;; 				      ((eq backend 'html)
-;; 				       (format "<a href=\"tel:%s\">%s</a>" path (or desc path)))
-;; 				      ((eq backend 'odt)
-;; 				       (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" path (or desc path))))))
+(with-eval-after-load 'ol
+   (org-link-set-parameters "tel"
+ 			   :export (lambda (path desc backend)
+ 				     (cond
+ 				      ((eq backend 'html)
+ 				       (format "<a href=\"tel:%s\">%s</a>" path (or desc path)))
+ 				      ((eq backend 'odt)
+ 				       (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" path (or desc path)))))))
 
 (use-package yafolding
     :ensure t
@@ -507,11 +523,22 @@
     (nyan-mode -1)))
 ; customize nyan-mode progress-bar background
 ; Eshell Setup
-(setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-in-side-window (side . bottom))))
-(setq display-buffer-alist '(("\\`\\*eat" display-buffer-in-side-window (side . bottom))))
+;; (setq display-buffer-alist
+      ;; '(("\\`\\*e?shell" display-buffer-in-side-window (side . bottom))))
+;; (setq display-buffer-alist
+      ;; '(("\\`\\*eat" display-buffer-in-side-window (side . bottom))))
+(add-to-list 'display-buffer-alist
+             '("\\`\\*eshell\\*\\(?:<[[:digit:]]+>\\)?\\'"
+               (display-buffer-in-side-window (side . bottom))))
+(add-to-list 'display-buffer-alist
+             '("\\`\\*eat\\*\\(?:<[[:digit:]]+>\\)?\\'"
+               (display-buffer-in-side-window (side . bottom))))
+(add-to-list 'display-buffer-alist
+             '("\\`\\*vterm\\*\\(?:<[[:digit:]]+>\\)?\\'"
+               (display-buffer-in-side-window (side . bottom))))
 
 (require 'general)
-
+(require 'eshell)
 ; NOTE: holding C-c also works to send 'eshell-interrupt-process'
 (general-def :keymaps 'eshell-mode-map :states '(insert) "C-c RET" 'eshell-kill-process)
 
@@ -519,6 +546,9 @@
     :after eshell-mode
     :config
     (eshell-syntax-highlighting-global-mode 1))
+
+(add-hook 'eshell-mode-hook (lambda () (eshell-syntax-highlighting-mode 1)))
+(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
 
 (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
         eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
@@ -528,6 +558,23 @@
         eshell-scroll-to-bottom-on-input t
         eshell-destroy-buffer-when-process-dies t
         eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+; https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/
+;; (setq eshell-prompt-function
+;;       (lambda ()
+;;         (concat
+;;          (propertize "┌─[" 'face `(:foreground "#2aa198"))
+;;          (propertize (user-login-name) 'face `(:foreground "#dc322f"))
+;;          (propertize "@" 'face `(:foreground "#2aa198"))
+;;          (propertize (system-name) 'face `(:foreground "#268bd2"))
+;;          (propertize "]──[" 'face `(:foreground "#2aa198"))
+;;          (propertize (format-time-string "%H:%M" (current-time)) 'face `(:foreground "#b58900"))
+;;          (propertize "]──[" 'face `(:foreground "#2aa198"))
+;;          (propertize (concat (eshell/pwd)) 'face `(:foreground "#93a1a1"))
+;;          (propertize "]\n" 'face `(:foreground "#2aa198"))
+;;          (propertize "└─>" 'face `(:foreground "#2aa198"))
+;;          (propertize (if venv-current-name (concat " (" venv-current-name ")")  "") 'face `(:foreground "#00dc00"))
+;;          (propertize (if (= (user-uid) 0) " # " " $ ") 'face `(:foreground "#2aa198"))
+;;          )))
 
 (use-package eat)
 (add-to-list 'exec-path "/home/linuxbrew/.linuxbrew/bin/")
