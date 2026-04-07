@@ -259,7 +259,7 @@
     "o" '(:ignore t :wk "Open")
     "o b" '(browse-url-of-buffer :wk "Open the current buffer in the XDG default browser")
     "o c" '(calendar :wk "Open Calendar")  
-    "o e" '(eshell :wk "Open Eshell")  
+    "o e" '(new-eshell :wk "Open Eshell")  
     "o f" '(make-frame-command :wk "Open new window (Frame)")  
     "o l" '(browse-url-xdg-open :wk "Open a URL in the XDG default browser")
     "o s" '(org-side-tree :wk "Org Side-Tree")
@@ -279,6 +279,7 @@
     "t" '(:ignore t :wk "Toggle")
     "t c" '(org-toggle-checkbox :wk "Toggle Orgmode checkboxes")
     "t d" '(toggle-dialog-box :wk "Toggle GUI dialogs")
+    "t e" '(toggle-eshell :wk "Toggle Eshell")
     "t i" '(org-toggle-inline-images :wk "Toggle Orgmode inline images")
     "t l" '(org-toggle-link-display :wk "Toggle Orgmode link display")
     "t L" '(display-line-numbers-mode :wk "Toggle line numbers")
@@ -529,10 +530,6 @@
     (nyan-mode -1)))
 ; customize nyan-mode progress-bar background
 ; Eshell Setup
-;; (setq display-buffer-alist
-      ;; '(("\\`\\*e?shell" display-buffer-in-side-window (side . bottom))))
-;; (setq display-buffer-alist
-      ;; '(("\\`\\*eat" display-buffer-in-side-window (side . bottom))))
 (add-to-list 'display-buffer-alist
              '("\\`\\*eshell\\*\\(?:<[[:digit:]]+>\\)?\\'"
                (display-buffer-in-side-window (side . bottom))))
@@ -592,3 +589,18 @@
 ; Retrieved 2026-03-17, License - CC BY-SA 3.0
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
+(defun new-eshell ()
+  "Create a new eshell buffer with a unique name."
+  (interactive)
+  (eshell t))
+
+(defun toggle-eshell (&optional name)
+  "Toggle an eshell buffer by name. Kill it if it exists, create it if it doesn't.
+NAME defaults to 'eshell' if not provided."
+  (interactive "sEshell name (default 'eshell'): ")
+  (let ((buffer-name (concat "*" (or (and (> (length name) 0) name) "eshell") "*")))
+    (if (get-buffer buffer-name)
+        (kill-buffer buffer-name)
+      (let ((buf (eshell t)))
+        (rename-buffer buffer-name t)))))
