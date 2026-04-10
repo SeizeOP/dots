@@ -2,6 +2,9 @@ alias scrntime scrntime -s 3
 alias edit find-file-other-window $@*
 alias less view-file-other-window $@*
 alias dots cd ~/dotfiles/
+alias dow cd ~/Downloads/
+alias docu cd ~/Documents/
+alias desk cd ~/Desktop/
 alias scripts cd ~/scripts/ 
 alias ... cd ../.. $*
 alias .... cd ../../.. $*
@@ -13,3 +16,4 @@ alias lt ls -ltAh --color=always $*
 alias ff find-file $1
 alias e find-file-other-window $1
 alias d dired $1
+alias md mkdir $*

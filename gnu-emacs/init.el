@@ -163,6 +163,12 @@
 		org-side-tree-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+(dolist (mode '(org-mode-hook
+		prog-mode-hook
+		org-side-tree-mode-hook))
+  (add-hook mode (lambda () (hs-minor-mode 1))))
+
+
 ; set theme
 ;(load-theme 'modus-vivendi t)
 
@@ -360,6 +366,7 @@
 (add-hook 'org-mode-hook 'org-appear-mode)
 
 (setq org-image-actual-width nil)
+(electric-indent-mode -1)
 
 ;; like org apear for subscripts (using '_') and superscripts (using '^')
 (setq org-pretty-entities 1)
@@ -417,6 +424,7 @@
 
 ;; ORG
 (require 'org-tempo)
+(add-hook 'org-mode-hook 'org-indent-mode)
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
@@ -467,6 +475,18 @@
  				       (format "<a href=\"tel:%s\">%s</a>" path (or desc path)))
  				      ((eq backend 'odt)
  				       (format "<text:a xlink:type=\"simple\" xlink:href=\"tel:%s\">%s</text:a>" path (or desc path)))))))
+
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%b %d %Y>" . "<%m/%d/%Y %a %H:%M>"))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 (use-package yafolding
     :ensure t
     :hook org-mode prog-mode shell-script-mode)

@@ -1109,7 +1109,7 @@ bind the 'TAB' key to 'org-cycle'. This allows us to use the 'TAB' key in org-mo
   ;; (setq evil-want-C-i-jump nil)
 #+end_src
 
-*** Evil-org
+*z** Evil-org
 Install =evil-org= package which should resolve some keybind conflicts between =org-mode= and =evil-mode=.
 #+begin_src emacs-lisp
 (use-package evil-org
